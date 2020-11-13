@@ -1,0 +1,13 @@
+<%-include("../partials/header")%>
+    <% for(let article of news.articles){%>
+    Title: <%=article.title%>
+    <br>
+        Description:<%=article.description%>
+        <br>
+    <a href=<%=article.url%> target="_blank">Read the full story here!</a>
+        <br>
+        <p></p>
+        <%}%>
+
+<%-include("../partials/footer")%>
+

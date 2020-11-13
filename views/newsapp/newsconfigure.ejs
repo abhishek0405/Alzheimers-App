@@ -1,0 +1,29 @@
+<%-include("../partials/header")%>
+<div class="container">
+<form action="/news" method="POST">
+    <div class="form-row align-items-center">
+      
+        <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1" name="Country" class="custom-control-input" value="in">
+            <label class="custom-control-label" for="customRadio1">India</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio2" name="Country" class="custom-control-input" value="us">
+            <label class="custom-control-label" for="customRadio2">USA</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio3" name="Country" class="custom-control-input" value="au">
+            <label class="custom-control-label" for="customRadio3">AUSTRALIA</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio4" name="Country" class="custom-control-input" value="fr">
+            <label class="custom-control-label" for="customRadio4">FRANCE</label>
+          </div>
+
+      <div class="col-auto my-1">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+</div>
+  </form>
+<%-include("../partials/footer")%>
