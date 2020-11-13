@@ -56,10 +56,10 @@ app.use(require("express-session")({
 
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
-const uri = 'mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority';
 
 
-mongoose.connect('mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true})
+
+mongoose.connect('',{ useNewUrlParser: true, useUnifiedTopology: true})
 
 
 
