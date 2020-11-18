@@ -121,10 +121,6 @@ app.get('/logout',function(req,res){
 	res.redirect('/');
 })
 
-app.listen(3000,function(){
-	console.log("Server Started");
-})
-
 app.post('/news',(req,res)=>{
     newsapi.v2.topHeadlines({
         country: req.body.Country,
@@ -143,4 +139,8 @@ app.post('/news',(req,res)=>{
 
 app.get('/news/configure',(req,res)=>{
     res.render('newsapp/newsconfigure');
+})
+
+app.listen(3000,function(){
+	console.log("Server Started");
 })
