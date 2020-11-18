@@ -1,0 +1,17 @@
+<head>
+<link rel="stylesheet" href="/stylesheets/app.css">
+</head>
+<%if(CurrentUser.DP.data){%>
+
+<img id="UserDp"  src="data:image/<%=CurrentUser.DP.contentType%>;base64, 
+                     <%=CurrentUser.DP.data.toString('base64')%>"> 
+<%}%>
+<h1>Welcome <%=CurrentUser.name %></h1>
+
+<p>
+	</p>
+	
+
+<h1>fun fact: BUNGEE GUM HAS THE PROPERTIES OF BOTH RUBBER AND GUM</h1>
+
+<a href="/logout">log out</a>
