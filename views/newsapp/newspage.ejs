@@ -1,13 +1,29 @@
 <%-include("../partials/header")%>
-    <% for(let article of news.articles){%>
-    Title: <%=article.title%>
-    <br>
-        Description:<%=article.description%>
-        <br>
-    <a href=<%=article.url%> target="_blank">Read the full story here!</a>
-        <br>
-        <p></p>
-        <%}%>
+    <a href="news/configure"><strong>Change News Settings</strong></a>
+    <p></p>
+    <div class="container">
+<% for(let article of news.articles){%>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id=<%="headingOne"+article.title%>>
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target=<%="#collapseOne" + article.title%> aria-expanded="true" aria-controls=<%="collapseOne" + article.title%>>
+                <%=article.title%>
+              </button>
+            </h2>
+          </div>
+      
+          <div id=<%="collapseOne" + article.title %> class="collapse show" aria-labelledby=<%="headingOne"+article.title%> data-parent="#accordionExample">
+            <div class="card-body">
+                <%=article.description%>
+                <a href=<%=article.url%> target="_blank">Read the full story here!</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
+
+<%}%>
+</div>
 <%-include("../partials/footer")%>
 

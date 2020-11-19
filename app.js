@@ -121,6 +121,18 @@ app.get('/logout',function(req,res){
 	res.redirect('/');
 })
 
+app.get('/news',(req,res)=>{
+    newsapi.v2.topHeadlines({
+        country: 'in',
+        language: 'en',
+      }).then(response => {
+        console.log(response);
+        res.render('newsapp/newspage',{news:response});
+      }).catch((e)=>{
+        console.log(e);
+    });
+})
+
 app.post('/news',(req,res)=>{
     newsapi.v2.topHeadlines({
         country: req.body.Country,
@@ -133,9 +145,7 @@ app.post('/news',(req,res)=>{
     });
 })
 
-app.post('/news',(req,res)=>{
-  res.redirect('/news');
-})
+
 
 app.get('/news/configure',(req,res)=>{
     res.render('newsapp/newsconfigure');
