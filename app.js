@@ -1,12 +1,20 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const app1=express();//caretaker
 const NewsAPI = require('newsapi');
 const { type } = require('os');
 const newsapi = new NewsAPI('3dd595f2d707459499de0e17e7861822');
 app.use(express('public'));
 app.use(bodyParser.urlencoded({extended:true}))
 app.set("view engine","ejs");
+
+//app1 caretaker
+app1.use(express('public'));
+app1.use(bodyParser.urlencoded({extended:true}))
+app1.set("view engine","ejs");
+//end
+
 var mongoose = require("mongoose");
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
@@ -59,6 +67,18 @@ app.use(require("express-session")({
 	saveUninitialized:false
 }))
 
+//CARETAKER APP1
+
+app1.use(express.static((__dirname+"/public")));
+app1.use(flash());
+app1.use(require("express-session")({
+	secret:"KEY123",
+	resave:false,
+	saveUninitialized:false
+}))
+
+//END
+
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
@@ -68,14 +88,19 @@ mongoose.connect('mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzhe
 
 app.use(authpatient.initialize({ userProperty:'patientuser'}));
 app.use(authpatient.session());
-app.use(authcaretaker.initialize({ userProperty:'caretakeruser'}));
-app.use(authcaretaker.session())
+
+//CHANGED TO APP1 HERE
+app1.use(authcaretaker.initialize({ userProperty:'caretakeruser'}));
+app1.use(authcaretaker.session())
+//END
+
 /*app.use(passport.initialize());
 
 
 app.use(passport.session());
 passport.use('patientuser', new LocalStrategy(Patient.authenticate()));
 passport.use('caretakeruser', new LocalStrategy(Caretaker.authenticate()));*/
+
 
 authpatient.use(new LocalStrategy(Patient.authenticate('patientuser')));
 authcaretaker.use(new LocalStrategy(Caretaker.authenticate('caretakeruser')));
@@ -94,6 +119,14 @@ app.use(function(req,res,next){
 	next();
 })
 
+//CARETAKER APP1
+
+app1.use(function(req,res,next){
+	res.locals.CARETAKER = req.user;
+	next();
+})
+
+//end
 
 app.get('/',(req,res)=>{
     res.render('landing.ejs');
@@ -103,7 +136,7 @@ app.get('/patient/register', (req, res)=>{
 	res.render('auth/patientReg.ejs');
 })
 
-app.get('/caretaker/register', (req, res)=>{
+app1.get('/caretaker/register', (req, res)=>{
 	res.render('auth/caretakerReg.ejs');
 })
 
@@ -111,7 +144,7 @@ app.get('/patient/login', (req, res)=>{
 	res.render('auth/patientLogin.ejs');
 })
 
-app.get('/caretaker/login', (req, res)=>{
+app1.get('/caretaker/login', (req, res)=>{
 	res.render('auth/caretakerLogin.ejs');
 })
 
@@ -164,7 +197,7 @@ app.get('/news/configure',(req,res)=>{
     res.render('newsapp/newsconfigure');
 })
 
-app.post('/caretaker/register',upload.single('DP'), (req, res)=>{
+app1.post('/caretaker/register',upload.single('DP'), (req, res)=>{
 	
 	var newCaretaker = new Caretaker({
 		name: req.body.name,
@@ -200,7 +233,7 @@ app.post('/patient/login',authpatient.authenticate("local",{
 	
 })
 
-app.post('/caretaker/login',authcaretaker.authenticate("local",{
+app1.post('/caretaker/login',authcaretaker.authenticate("local",{
 	successRedirect:"/caretaker/home",
 	failureRedirect:"/caretaker/login"
 
@@ -216,7 +249,7 @@ app.get('/patient/home',function(req,res){
 	console.log(req.patientuser._id);
 })
 
-app.get('/caretaker/home',function(req,res){
+app1.get('/caretaker/home',function(req,res){
 	res.render("homepageCaretaker.ejs");
 	//console.log(req.user);
 	console.log(req.caretakeruser);
@@ -227,11 +260,8 @@ app.get('/logout',function(req,res){
 	res.redirect('/');
 })
 
-
-
-
-
-
 app.listen(3000,()=>{
     console.log('server started at port 3000');
 })
+
+
