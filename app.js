@@ -151,6 +151,67 @@ app.get('/news/configure',(req,res)=>{
     res.render('newsapp/newsconfigure');
 })
 
+app.get('/entertainment', (req,res)=>{
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("users");
+					  
+					  console.log("success getting");
+					  collection.find({_id: ObjectId(req.user._id) }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+
+							vidids = "";
+
+							for(var i=0; i<data[0].videos.length-1; i++)
+							{
+								vidids += data[0].videos[i] ;
+								vidids += ",";
+
+							}
+							vidids += data[0].videos[data[0].videos.length-1];
+							console.log(req.user.name);
+							console.log(vidids);
+							
+							res.render('entertainment.ejs', {result: vidids});
+
+						});
+			
+			        });
+					  	client.close();	
+})
+
+app.get('/addvideos', (req,res)=>{
+
+
+	res.render('addVideos.ejs');
+
+})
+
+app.post('/addvideos', (req,res)=>{
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	console.log("adding videos for");
+	console.log(req.body);
+	client.connect(err => {
+
+		    collection = client.db("alzheimers").collection("users");
+			
+			
+			collection.updateOne({_id: ObjectId(req.user._id)}, {$addToSet: {videos: req.body.videoid}},
+					function(err, res) {
+
+						    if (err) throw err;
+						    console.log("1  document updated");
+
+						    client.close();
+						});
+	});
+
+	res.render('addVideos.ejs');
+})
+
 app.listen(3000,function(){
 	console.log("Server Started at http://localhost:3000/");
 })
