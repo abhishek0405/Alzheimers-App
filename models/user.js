@@ -11,7 +11,8 @@ var userSchema =  new mongoose.Schema({
     { 
         data: Buffer, 
         contentType: String 
-    } 	
+    } ,
+	videos: [String]
 	
 });
 
