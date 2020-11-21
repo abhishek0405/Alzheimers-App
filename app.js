@@ -212,6 +212,20 @@ app.post('/addvideos', (req,res)=>{
 	res.render('addVideos.ejs');
 })
 
+app.get('/games', (req,res)=>{
+
+	res.render('games.ejs');
+})
+
+app.get('/memorygame', (req,res)=>{
+
+	res.render('memoryGame.ejs');
+})
+
+app.get('/quiz', (req,res)=>{
+	res.render('quiz.ejs');
+})
+
 app.listen(3000,function(){
 	console.log("Server Started at http://localhost:3000/");
 })
