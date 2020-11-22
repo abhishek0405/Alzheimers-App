@@ -164,16 +164,19 @@ app.get('/entertainment', (req,res)=>{
 							console.log(data);
 
 							vidids = "";
+							if(data[0].hasOwnProperty('videos')){
+								
+								for(var i=0; i<data[0].videos.length-1; i++)
+								{
+									vidids += data[0].videos[i] ;
+									vidids += ",";
 
-							for(var i=0; i<data[0].videos.length-1; i++)
-							{
-								vidids += data[0].videos[i] ;
-								vidids += ",";
-
+								}
+								vidids += data[0].videos[data[0].videos.length-1];
+								console.log(req.user.name);
+								console.log(vidids);
 							}
-							vidids += data[0].videos[data[0].videos.length-1];
-							console.log(req.user.name);
-							console.log(vidids);
+							
 							
 							res.render('entertainment.ejs', {result: vidids});
 
