@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/stylesheets/app.css">
+<a href="/home">Back to home</a>
+<br><br>
+
+<a href="/circleupload">Add more people</a>
+
+
+<h2>Your relatives and friends: </h2>
+<% for(var i=0; i<result.length; i++){ %>
+
+<br><br>
+This is <%= result[i].relName %>
+<br>
+It's your <%= result[i].relation %>
+<br>
+<%if(result[i].photos.length != 0){
+var j = Math.floor(Math.random() * result[i].photos.length)%>
+
+<img id="relpic"  src="data:image/<%=result[i].photos[j].contentType%>;base64, 
+                     <%=result[i].photos[j].data.toString('base64')%>"> 
+<%}%>
+
+
+<% } %>
+

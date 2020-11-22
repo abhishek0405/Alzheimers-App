@@ -6,6 +6,7 @@ var bodyParser= require("body-parser");
 var LocalStrategy=require("passport-local");
 var	LocalMongoose=require("passport-local-mongoose");
 var	User = require('./models/user'),
+	Relative = require('./models/myCircle'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
@@ -224,6 +225,81 @@ app.get('/memorygame', (req,res)=>{
 
 app.get('/quiz', (req,res)=>{
 	res.render('quiz.ejs');
+})
+
+app.get('/circle', (req,res)=>{
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("relatives");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							
+							res.render('myCircle.ejs', {result: data});
+
+						});
+			
+			        });
+					  	client.close();	
+	
+})
+
+
+app.get('/circleupload', (req,res) =>{
+
+	
+	res.render('myCircleUpload.ejs');
+
+})
+
+
+
+app.post('/circleupload',upload.array('files'),function(req,res,next){
+	
+	var photos = [];
+	for(var i=0; i<req.files.length; i++)
+	{
+		photos.push({ 
+	            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.files[i].filename)), 
+	            contentType: 'image/png'
+        	});
+	}
+	
+	var newRelative = new Relative({
+		patUserName: req.user.username,
+		relName: req.body.relName,
+		relation: req.body.relation,
+		
+		photos: photos
+
+	});
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	console.log("adding relative for");
+	console.log(req.body);
+	client.connect(err => {
+
+			  collection = client.db("alzheimers").collection("relatives");
+			  
+			  console.log("success");
+
+			  	collection.insertOne(newRelative, (err, result) => {
+				        if(err) {
+				            
+				            console.log(err);
+				        }
+
+				 
+				        	console.log("done");
+				
+	        });
+			  	client.close();
+		});
+	res.render('myCircleUpload.ejs');
+	
+	
 })
 
 app.listen(3000,function(){
