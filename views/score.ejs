@@ -1,0 +1,38 @@
+
+<link rel="stylesheet" href="/stylesheets/app.css">
+<a href="/home">Back to home</a>
+<p></p>
+SCORE
+<p></p>
+YOUR TOTAL SCORE : <%=score%>/<%=all_questions.length%>
+<p></p>
+<%let i=0%>
+<p></p>
+<div class="container">
+<%for(var question of all_questions){%>
+    <img id="relpic"  src="data:image/<%=question.photo.contentType%>;base64, 
+                     <%=question.photo.data.toString('base64')%>">
+    <p></p>
+    OPTIONS:
+    <br>
+    1)<%=question.options[0]%>
+    <p></p>
+    2)<%=question.options[1]%>
+    <p></p>
+    YOUR ANSWER: <%=myanswer[i]%>
+    <br>
+    <br>
+    <%if(boolarr[i]===true){%>
+        You answered correctly!
+        <br>
+    <%}else{%>
+        You did not answer correctly.... 
+        <br>
+        The correct answer is <%=correctansarr[i]%>
+        <br>
+        <br>
+        <br>
+        <%}%>
+        <%i+=1%>
+<%}%>
+</div>

@@ -10,7 +10,7 @@ var	User = require('./models/user'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
-
+const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
@@ -22,6 +22,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }); 
 const NewsAPI = require('newsapi');
 const { type } = require('os');
+const { ESRCH } = require('constants');
 const newsapi = new NewsAPI('3dd595f2d707459499de0e17e7861822');
 
 const MongoClient = require("mongodb").MongoClient;
@@ -34,6 +35,40 @@ function isLoggedIn(req,res,next){
 	else{
 		res.redirect('/login');
 	}
+}
+
+function getRandom(arr, n) {
+    var result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+        var x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+}
+//preparing the quiz
+
+
+let all_questions;
+const GetRandQuestion =(personobj,allnames)=>{
+	
+	let randpicind = Math.floor(Math.random() * personobj.photos.length);
+	let randphoto = personobj.photos[randpicind];
+	let answer = personobj.relName;
+	let ansind = allnames.indexOf(answer);
+	let option2 = allnames[(ansind+1)%allnames.length];
+	let options = [answer,option2];
+	let questionobj ={
+		'photo':randphoto,
+		'options':options,
+		'answer':answer
+	}
+
+	return questionobj;
 }
 
 app.use(express('public'));
@@ -304,6 +339,69 @@ app.post('/circleupload',upload.array('files'),function(req,res,next){
 	
 	
 })
+
+app.get('/guesswho',isLoggedIn,(req,res)=>{
+	
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("relatives");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							let maxind = Math.min(data.length,5);
+							let randarray = getRandom(data,maxind);
+							let allnames=[];
+							for(var obj of data){
+								allnames.push(obj.relName);
+							}
+							 all_questions=[];
+							for(var obj of randarray){
+								let question = GetRandQuestion(obj,allnames);
+								all_questions.push(question);
+							}
+							
+							
+							console.log("THE QUESTION SET IS",all_questions);
+							res.render('guesswho', {all_questions:all_questions});
+
+						});
+			
+			        });
+					  	client.close();	
+	
+})
+
+app.post('/guesswho/checkanswer',(req,res)=>{
+	let myanswer=[];
+	console.log("FORM RESPONSE IS",req.body);
+	let boolarr=[]
+	console.log("all questions data ",all_questions);
+	let score=0;
+	let correctansarr = all_questions.map(obj=>obj.answer);
+	let indices = all_questions.length;
+	for(var i=1;i<=indices;i++){
+		
+		let key = "Choice"+(i);
+		let value = req.body[key];
+		myanswer[i-1]=value;
+		if(correctansarr[i-1]===value){
+			console.log("correct ans");
+			score+=1;
+			boolarr[i-1]=true;
+		}
+		else{
+			boolarr[i-1]=false;
+			console.log("wrong answer");
+		}
+	}
+	console.log(correctansarr);
+	console.log(boolarr);
+	res.render("score",{boolarr:boolarr,correctansarr:correctansarr,myanswer:myanswer,score:score,all_questions:all_questions})
+})
+
 
 app.listen(3000,function(){
 	console.log("Server Started at http://localhost:3000/");
