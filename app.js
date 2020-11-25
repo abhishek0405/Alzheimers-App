@@ -286,6 +286,23 @@ app.get('/circle', (req,res)=>{
 })
 
 
+
+var storageCircle = multer.diskStorage({ 
+    destination: (req, file, cb) => {
+    if (!fs.existsSync('uploads/'+ req.user.username )){
+    		fs.mkdirSync('uploads/'+ req.user.username);
+	} 
+    	if (!fs.existsSync('uploads/'+ req.user.username + '/' + req.body.relName)){
+    		fs.mkdirSync('uploads/'+ req.user.username + '/' + req.body.relName);
+	}
+        cb(null, 'uploads/'+ req.user.username + '/' + req.body.relName) ;
+    }, 
+    filename: (req, file, cb) => { 
+        cb(null, file.fieldname + '-' + Date.now()) 
+    } 
+}); 
+var uploadCircle = multer({ storage: storageCircle }); 
+
 app.get('/circleupload', (req,res) =>{
 
 	
@@ -293,15 +310,13 @@ app.get('/circleupload', (req,res) =>{
 
 })
 
-
-
-app.post('/circleupload',upload.array('files'),function(req,res,next){
+app.post('/circleupload',uploadCircle.array('files'),function(req,res,next){
 	
 	var photos = [];
 	for(var i=0; i<req.files.length; i++)
 	{
 		photos.push({ 
-	            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.files[i].filename)), 
+	            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.user.username + '/'+ req.body.relName + '/' + req.files[i].filename)), 
 	            contentType: 'image/png'
         	});
 	}
@@ -339,6 +354,8 @@ app.post('/circleupload',upload.array('files'),function(req,res,next){
 	
 	
 })
+
+
 
 app.get('/guesswho',isLoggedIn,(req,res)=>{
 	
@@ -400,6 +417,13 @@ app.post('/guesswho/checkanswer',(req,res)=>{
 	console.log(correctansarr);
 	console.log(boolarr);
 	res.render("score",{boolarr:boolarr,correctansarr:correctansarr,myanswer:myanswer,score:score,all_questions:all_questions})
+})
+
+app.get('/video', (req,res)=>{
+
+	
+	res.render('videoRec.ejs');
+	
 })
 
 
