@@ -422,7 +422,38 @@ app.post('/guesswho/checkanswer',(req,res)=>{
 app.get('/video', (req,res)=>{
 
 	
-	res.render('videoRec.ejs');
+	let labels = [];
+	let path = [];
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("relatives");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							
+							for(let i=0; i<data.length; i++){
+								labels.push(data[i].relName);
+							}
+							console.log(labels);
+
+							for(let i=0; i<data.length; i++){
+								p=[];
+								for(let j=0; j<data[i].photos.length; j++){
+									p.push(data[i].photos[j].path);
+								}
+								path.push(p);
+							}
+
+							console.log(path);
+							
+							res.render('videoRec.ejs', {labels: labels, path: path});
+
+						});
+			
+			        });
+					  	client.close();	
 	
 })
 
