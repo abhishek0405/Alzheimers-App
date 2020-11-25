@@ -67,12 +67,12 @@ async function recognizeFaces() {
 
 function loadLabeledImages() {
     //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye' , 'Jim Rhodes', 'Thor', 'Tony Stark']
-    const labels = ['Vishaka Mohan'] // for WebCam
+    const labels = ['kartik'] // for WebCam
     return Promise.all(
         labels.map(async (label)=>{
             const descriptions = []
             for(let i=1; i<=2; i++) {
-                const img = await faceapi.fetchImage(`../labeled_images/${label}/${i}.jpg`)
+                const img = await faceapi.fetchImage(`../../uploads/kartik/abhishek/files-1606304889888`)
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
                 console.log(label + i + JSON.stringify(detections))
                 descriptions.push(detections.descriptor)
