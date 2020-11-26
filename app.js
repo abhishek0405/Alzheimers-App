@@ -317,7 +317,8 @@ app.post('/circleupload',uploadCircle.array('files'),function(req,res,next){
 	{
 		photos.push({ 
 	            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.user.username + '/'+ req.body.relName + '/' + req.files[i].filename)), 
-	            contentType: 'image/png'
+				contentType: 'image/png',
+				path: req.files[i].path
         	});
 	}
 	
@@ -422,9 +423,8 @@ app.post('/guesswho/checkanswer',(req,res)=>{
 app.get('/video', (req,res)=>{
 
 	
-	let labels = [];
-	let path = [];
-
+	 let labels = [];
+	 let path = [];
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	client.connect(err => {
 					  collection = client.db("alzheimers").collection("relatives");

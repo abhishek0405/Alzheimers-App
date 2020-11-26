@@ -8,7 +8,8 @@ var relSchema =  new mongoose.Schema({
 	photos: 
     [{ 
         data: Buffer, 
-        contentType: String 
+        contentType: String,
+        path: String
     }]
 	
 });

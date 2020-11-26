@@ -1,6 +1,8 @@
+
 const video = document.getElementById('videoInput')
-
-
+//console.log("labels in video,js",global.labels);
+console.log("Face api is",faceapi);
+//console.log("Labels are",labels);
 Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
     faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
@@ -67,16 +69,20 @@ async function recognizeFaces() {
 
 function loadLabeledImages() {
     //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye' , 'Jim Rhodes', 'Thor', 'Tony Stark']
-    const labels = ['kartik'] // for WebCam
+    const labels = ['kartik','abhishek','veena'] // for WebCam
     return Promise.all(
         labels.map(async (label)=>{
             const descriptions = []
-            for(let i=1; i<=2; i++) {
-                const img = await faceapi.fetchImage(`../../uploads/kartik/abhishek/files-1606304889888`)
-                const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-                console.log(label + i + JSON.stringify(detections))
-                descriptions.push(detections.descriptor)
-            }
+            
+
+                    for(var i=1;i<=2;i++){
+                        const img = await faceapi.fetchImage(`abhishek/${label}/${i}.jpg`)
+                        const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
+                        console.log(label + i + JSON.stringify(detections))
+                        descriptions.push(detections.descriptor)
+                    }
+            
+            
             document.body.append(label + ' Faces Loaded | ')
             return new faceapi.LabeledFaceDescriptors(label, descriptions)
         })
