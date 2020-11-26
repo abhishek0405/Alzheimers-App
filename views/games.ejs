@@ -1,5 +1,23 @@
+<link rel="stylesheet" href="/stylesheets/app.css">
 all games here
 
 MEMORY GAME : <a href="/memorygame">MEMORY GAME HERE</a>
 <p></p>
 GUESS WHO :   <a href="/guesswho">Guess Who here</a>
+
+<div id="reminders">
+    <h3>YOUR RECENT REMINDERS</h3>
+
+<br>
+<%= msg %>
+
+<% for(var i=0; i<myreminders.length; i++){ %>
+
+Time: <%= myreminders[i].time %>
+<br><br>
+<%= myreminders[i].tag %>
+
+<br><br>
+
+<%}%>
+</div>

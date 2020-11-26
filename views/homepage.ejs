@@ -19,4 +19,27 @@ Games : <a href="/games">Show Games</a>
 <p></p>
 My Circle : <a href="/circle">Circle</a>
 <p></p>
+FACE RECOG: <a href="/video">Identify here</a>
+<p></p>
+Events: <a href="/events">show my events</a>
+<p></p>
 <a href="/logout">log out</a>
+
+<br>
+<br>
+<div id="reminders">
+    <h3>YOUR RECENT REMINDERS</h3>
+
+<br>
+<%= msg %>
+
+<% for(var i=0; i<myreminders.length; i++){ %>
+
+Time: <%= myreminders[i].time %>
+<br><br>
+<%= myreminders[i].tag %>
+
+<br><br>
+
+<%}%>
+</div>
