@@ -1,0 +1,15 @@
+<a href="/eventsadd">Add reminders</a>
+
+<h2>Your upcoming reminders: </h2>
+
+<br>
+<%= msg %>
+<% for(var i=0; i<result.length; i++){ %>
+
+Time: <%= result[i].time %>
+<br><br>
+<%= result[i].tag %>
+
+<br><br>
+
+<%}%>

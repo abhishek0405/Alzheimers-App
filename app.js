@@ -7,6 +7,7 @@ var LocalStrategy=require("passport-local");
 var	LocalMongoose=require("passport-local-mongoose");
 var	User = require('./models/user'),
 	Relative = require('./models/myCircle'),
+	Event = require('./models/events'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
@@ -97,6 +98,47 @@ app.use(function(req,res,next){
 	res.locals.CurrentUser = req.user;
 	next();
 })	
+
+function checkReminders(data){
+	var d = new Date(); 
+	var currDay = d.getDay();
+	console.log(d);
+	console.log(d.getDay());
+	var timeStart = new Date().getHours();
+	var minStart = new Date().getMinutes();
+	var resReminders = [];
+	
+
+	for(let i=0; i<data.length; i++){
+		for(let j=0; j<data[i].days.length; j++){
+			if(data[i].days[j]== currDay){
+				var timeEnd = new Date("01/01/2007 " + data[i].time + ":00").getHours();
+				if(timeEnd - timeStart <= 2 && timeEnd - timeStart >=0){
+					console.log("Inside check");
+					console.log(timeEnd - timeStart);
+					if(timeEnd - timeStart == 0){
+						var minEnd = new Date("01/01/2007 " + data[i].time + ":00").getMinutes();
+						console.log(minEnd - minStart);
+						if(minEnd - minStart >= 0){
+							resReminders.push(data[i]);
+						}
+					}
+					else{
+						resReminders.push(data[i]);
+
+					}
+					
+
+				}
+
+			}
+		}
+	}
+	console.log(resReminders);
+
+	return resReminders;
+	
+}
 
 
 
@@ -455,6 +497,89 @@ app.get('/video', (req,res)=>{
 			        });
 					  	client.close();	
 	
+})
+
+app.get('/events', (req,res) =>{
+
+	var msg = "";
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("events");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							result = checkReminders(data);
+							if(result.length==0){
+								msg = "No upcoming reminders (for 2 hours at least)";
+							}
+							res.render('events.ejs', {result: result, msg: msg});
+
+						});
+			
+			        });
+					  	client.close();	
+
+})
+
+app.get('/eventsadd', (req,res) => {
+	res.render('eventsAdd.ejs');
+	//console.log(req.query);
+	
+
+})
+
+app.post('/eventsadd', (req,res) =>{
+	console.log(req.body);
+	var days = [];
+	if("0" in req.body)
+		days.push("0");
+	if("1" in req.body)
+		days.push("1");
+	if("2" in req.body)
+		days.push("2");
+	if("3" in req.body)
+		days.push("3");
+	if("4" in req.body)
+		days.push("4");
+	if("5" in req.body)
+		days.push("5");
+	if("6" in req.body)
+		days.push("6");
+	console.log(days);
+
+	var newEvent = new Event({
+		patUserName: req.user.username,
+		days: days,
+		time: req.body.time,
+		tag: req.body.tag
+
+	});
+
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	console.log("adding events for");
+	console.log(req.user.username);
+	client.connect(err => {
+
+			  collection = client.db("alzheimers").collection("events");
+			  
+			  console.log("success");
+
+			  	collection.insertOne(newEvent, (err, result) => {
+				        if(err) {
+				            
+				            console.log(err);
+				        }
+
+				 
+				        	console.log("done");
+				
+	        });
+			  	client.close();
+		});
+	res.render('eventsAdd.ejs');
+
 })
 
 
