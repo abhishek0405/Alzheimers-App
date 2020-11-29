@@ -648,6 +648,7 @@ app.post('/eventsadd', (req,res) =>{
 })
 
 
-app.listen(3000,function(){
+app.listen(process.env.PORT||3000,function(){
+	console.log(process.env.PORT);
 	console.log("Server Started at http://localhost:3000/");
 })
