@@ -11,7 +11,8 @@ var	User = require('./models/user'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
-const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
+//const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
+const uri = process.env.DATABASEURL;
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
@@ -24,7 +25,8 @@ var upload = multer({ storage: storage });
 const NewsAPI = require('newsapi');
 const { type } = require('os');
 const { ESRCH } = require('constants');
-const newsapi = new NewsAPI('3dd595f2d707459499de0e17e7861822');
+const NEWSAPIKEY = process.env.NEWSAPIKEY;
+const newsapi = new NewsAPI(NEWSAPIKEY);
 
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
@@ -74,7 +76,7 @@ const GetRandQuestion =(personobj,allnames)=>{
 
 app.use(express('public'));
 app.set("view engine","ejs");
-mongoose.connect("mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
