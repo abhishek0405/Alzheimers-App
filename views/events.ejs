@@ -1,15 +1,61 @@
-<a href="/eventsadd">Add reminders</a>
+<!DOCTYPE html>
+<html>
 
-<h2>Your upcoming reminders: </h2>
+<head>
+	<link rel="stylesheet" href="/stylesheets/app.css">
 
-<br>
-<%= msg %>
-<% for(var i=0; i<result.length; i++){ %>
 
-Time: <%= result[i].time %>
-<br><br>
-<%= result[i].tag %>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<!--Fonts-->
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<!--Font Awesome-->
+	<script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
 
-<br><br>
+	<title>Landing</title>
 
-<%}%>
+</head>
+
+<body>
+	<div class="header">
+		<a href="/home">
+			<img src="/img/back.png" alt="">
+		</a>
+
+	</div>
+
+
+	<div class="container">
+        <h2>Login </h2>
+        <a href="/eventsadd" class="purp-btn">Add reminders</a>
+        
+<div id="reminders">
+    <h2 class="home-head">Reminders</h2>
+    
+
+    <p><%= msg %></p>
+    <table>
+        <tr>
+            <th>
+                Time
+            </th>
+            <th>
+                Message
+            </th>
+        </tr>
+        <% for(var i=0; i<result.length; i++){ %>
+        <tr>
+            <td><%= result[i].time %></td>
+            <td><%= result[i].tag %></td>
+        </tr>
+
+        <%}%>
+        
+    </table>
+</div>
+		
+
+
+	</div>
+</body>
+
+
