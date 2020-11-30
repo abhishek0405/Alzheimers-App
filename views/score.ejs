@@ -1,38 +1,70 @@
+<!DOCTYPE html>
+<html>
 
-<link rel="stylesheet" href="/stylesheets/app.css">
-<a href="/home">Back to home</a>
-<p></p>
-SCORE
-<p></p>
-YOUR TOTAL SCORE : <%=score%>/<%=all_questions.length%>
-<p></p>
-<%let i=0%>
-<p></p>
-<div class="container">
-<%for(var question of all_questions){%>
-    <img id="relpic"  src="data:image/<%=question.photo.contentType%>;base64, 
+<head>
+    <link rel="stylesheet" href="/stylesheets/app.css">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
+
+    <title>Landing</title>
+
+</head>
+
+<body>
+    <div class="header">
+        <a href="/guesswho">
+            <img src="/img/back.png" alt="">
+        </a>
+
+    </div>
+
+
+    <div class="container">
+        <h2>Score: <%=score%>/<%=all_questions.length%></h2>
+       
+        <h3 class="home-head home-head-bottom">Guess who?</h3>
+
+        <%let i=0%>
+
+        <div class="container">
+            <%for(var question of all_questions){%>
+            <img id="relpic" src="data:image/<%=question.photo.contentType%>;base64, 
                      <%=question.photo.data.toString('base64')%>">
-    <p></p>
-    OPTIONS:
-    <br>
-    1)<%=question.options[0]%>
-    <p></p>
-    2)<%=question.options[1]%>
-    <p></p>
-    YOUR ANSWER: <%=myanswer[i]%>
-    <br>
-    <br>
-    <%if(boolarr[i]===true){%>
-        You answered correctly!
-        <br>
-    <%}else{%>
-        You did not answer correctly.... 
-        <br>
-        The correct answer is <%=correctansarr[i]%>
-        <br>
-        <br>
-        <br>
-        <%}%>
+
+            <h3 class="home-head">Options</h3>
+
+            <p class="options">
+                1) <%=question.options[0]%>
+            </p>
+
+            <p class="options">
+                2) <%=question.options[1]%>
+            </p>
+
+            <h3 class="home-head">Your answer: <span class="crimson"><%=myanswer[i]%> </span></h3>
+
+
+            <%if(boolarr[i]===true){%>
+            <h3 class="home-head">You answered correctly!</h3>
+
+            <%}else{%>
+            <h3 class="home-head">You did not answer correctly...Keep trying! </h3>
+
+            <p>The correct answer is <%=correctansarr[i]%></p>
+
+            <%}%>
         <%i+=1%>
-<%}%>
-</div>
+            <%}%>
+
+
+
+
+    </div>
+</body>
+
+</html>

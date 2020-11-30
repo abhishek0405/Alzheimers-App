@@ -1,3 +1,8 @@
+
+:root{
+	--purple: #4A0D66;
+}
+
 *{
 	padding: 0;
 	margin:0;
@@ -5,13 +10,41 @@
 }
 
 body{
-	min-height: 100vh;
-	background-color: #000000;
+	height: 100vh;
+	background-color: #fff;
 	display: flex;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+
+
+}
+.settings{
+	text-decoration: none;
+	color: white;
+	float: right;
+}
+.header{
+	background-color: var(--purple);
+	position: fixed;
+	width: 100%;
+	padding: 1rem;
+}
+.header>i, .header>h3{
+	color: white;
+	display: inline;
+}
+.header>i{
+	float: right
+}
+.header>h3{
+	font-size: 5rem;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .memory-game{
-	width: 640px;
-	height: 640px;
+	width: 90vw;
+	height: 90vw;
 	margin: auto;
 	display: flex;
 	flex-wrap: wrap;
@@ -46,7 +79,7 @@ body{
 	padding: 20px;
 	border-radius: 5px;
 	position: absolute;
-	background: aqua;
+	background: var(--purple);
 	border: 2px solid deeppink;
 	backface-visibility: hidden;
 }
@@ -57,9 +90,18 @@ body{
 
 img{
 	width: 100px;
-
+}
+#back{
+	width: auto;
+}
+h2{
+	font-size: 5rem;
+	margin-bottom: 5rem;
+	text-align: center;
 }
 
 .win-message {
+	color: black;
+	margin-top: 10rem;
 	
 }
