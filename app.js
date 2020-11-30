@@ -11,8 +11,8 @@ var	User = require('./models/user'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
-//const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
-const uri = process.env.DATABASEURL;
+const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
+//const uri = process.env.DATABASEURL;
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
@@ -25,7 +25,8 @@ var upload = multer({ storage: storage });
 const NewsAPI = require('newsapi');
 const { type } = require('os');
 const { ESRCH } = require('constants');
-const NEWSAPIKEY = process.env.NEWSAPIKEY;
+//const NEWSAPIKEY = process.env.NEWSAPIKEY;
+const NEWSAPIKEY='3dd595f2d707459499de0e17e7861822';
 const newsapi = new NewsAPI(NEWSAPIKEY);
 
 const MongoClient = require("mongodb").MongoClient;

@@ -1,29 +1,58 @@
-<%-include("../partials/header")%>
-<div class="container">
-<form action="/news" method="POST">
-    <div class="form-row align-items-center">
-      
-        <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio1" name="Country" class="custom-control-input" value="in">
-            <label class="custom-control-label" for="customRadio1">India</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio2" name="Country" class="custom-control-input" value="us">
-            <label class="custom-control-label" for="customRadio2">USA</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio3" name="Country" class="custom-control-input" value="au">
-            <label class="custom-control-label" for="customRadio3">AUSTRALIA</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio4" name="Country" class="custom-control-input" value="fr">
-            <label class="custom-control-label" for="customRadio4">FRANCE</label>
-          </div>
+<!DOCTYPE html>
+<html>
 
-      <div class="col-auto my-1">
-        <button type="submit" class="btn btn-primary">Submit</button>
+<head>
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!--Fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
+
+  <title>Landing</title>
+
+</head>
+
+<body>
+  <div class="header">
+    <a href="/news">
+      <img src="/img/back.png" alt="">
+    </a>
+    <h3>Settings</h3>
+
+
+  </div>
+  <div class="container" >
+    <h3 id="heading-news">Select one of the following countries</h3>
+    <form action="/news" method="POST">
+
+      <div class="form-row align-items-center">
+
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio1" name="Country" class="custom-control-input" value="in">
+          <label class="custom-control-label" for="customRadio1">India</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio2" name="Country" class="custom-control-input" value="us">
+          <label class="custom-control-label" for="customRadio2">USA</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio3" name="Country" class="custom-control-input" value="au">
+          <label class="custom-control-label" for="customRadio3">Australia</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="customRadio4" name="Country" class="custom-control-input" value="fr">
+          <label class="custom-control-label" for="customRadio4">France</label>
+        </div>
+
+       
+        
       </div>
-    </div>
-</div>
-  </form>
-<%-include("../partials/footer")%>
+      <button type="submit" class="purp-btn">Submit</button>
+
+    </form>
+  </div>
+
+</body>
+
+</html>

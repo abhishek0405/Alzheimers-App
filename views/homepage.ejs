@@ -1,45 +1,95 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-<link rel="stylesheet" href="/stylesheets/app.css">
+    <link rel="stylesheet" href="/stylesheets/app.css">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
+
+    <title>Landing</title>
+
 </head>
-<%if(CurrentUser.DP.data){%>
 
-<img id="UserDp"  src="data:image/<%=CurrentUser.DP.contentType%>;base64, 
-                     <%=CurrentUser.DP.data.toString('base64')%>"> 
-<%}%>
-<h1>Welcome <%=CurrentUser.name %></h1>
-
-<p>
-	</p>
-	
+<body>
 
 
-News App : <a href="/news">Get Me News</a>
-<p></p>
-Games : <a href="/games">Show Games</a>
-<p></p>
-My Circle : <a href="/circle">Circle</a>
-<p></p>
-FACE RECOG: <a href="/video">Identify here</a>
-<p></p>
-Events: <a href="/events">show my events</a>
-<p></p>
-<a href="/logout">log out</a>
+    <div class="container homepage">
 
-<br>
-<br>
-<div id="reminders">
-    <h3>YOUR RECENT REMINDERS</h3>
+        <%if(CurrentUser.DP.data){%>
 
-<br>
-<%= msg %>
+        <img id="user-dp" src="data:image/<%=CurrentUser.DP.contentType%>;base64, 
+                         <%=CurrentUser.DP.data.toString('base64')%>">
+        <%}%>
+        <h2 class="home-head">Welcome <%=CurrentUser.name %></h2>
 
-<% for(var i=0; i<myreminders.length; i++){ %>
+        <div class="grid-container">
+            <a href="/news" class="home-box">
+                <img src="img/news.png" alt="">
+                <h3>News</h3>
+            </a>
+            <a href="/games" class="home-box">
+                <img src="img/games.png" alt="">
+                <h3>Games</h3>
+            </a>
+            <a class="home-box" href="/circle">
+                <img src="img/circle.png" alt="">
+                <h3>Circle</h3>
+            </a>
+            <a class="home-box" href="/video">
+                <img src="img/identify.png" alt="">
+                <h3>Identify</h3>
+            </a>
+            <a href="/events" class="home-box">
+                <img src="img/entertainment.png" alt="">
+                <h3>Events</h3>
+            </a>
+            <a href="/logout" class="home-box">
+                <img src="img/profile.png" alt="">
+                <h3>Logout</h3>
+            </a>
 
-Time: <%= myreminders[i].time %>
-<br><br>
-<%= myreminders[i].tag %>
+        </div>
 
-<br><br>
+        <div id="reminders">
+            <h2 class="home-head">Reminders</h2>
+            <p><%= msg %></p>
+            <table>
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                </tr>
+            <% for(var i=0; i<myreminders.length; i++){ %>
+                <tr>
+                    <td>  <%= myreminders[i].time %></td>
+                    <td> <%= myreminders[i].tag %></td>
+                </tr>
+               
+    
+               
+    
+    
+                <%}%>
+                
+            </table>
 
-<%}%>
-</div>
+           
+            
+            
+
+        </div>
+    
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="js/register.js"></script>
+
+</body>
