@@ -12,6 +12,8 @@ var	User = require('./models/user'),
 	path = require('path');
 var multer = require('multer'); 
 //const uri = process.env.DATABASEURL;
+const uri= 'mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority'
+const NEWSAPIKEY = '3dd595f2d707459499de0e17e7861822'
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
