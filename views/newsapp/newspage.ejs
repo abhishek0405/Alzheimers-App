@@ -26,6 +26,15 @@
 
   </div>
   <div class="container news-container">
+  
+  <% function getTime(dateString){
+        let d = new Date(dateString);
+        let date = d.getDate();
+        let month = d.getMonth()+1;
+        let year = d.getFullYear();
+        
+        return(date + "/" + month + "/" + year);
+    } %>
 
     <% for(let article of news.articles){%>
       <div class="news">
@@ -34,7 +43,7 @@
             <h3 id=<%="headingOne"+article.title%>>
               <%=article.title%>
             </h3>
-            <p class="time"><%=article.publishedAt%></p>
+            <p class="time"><%= getTime(article.publishedAt) %></p>
           </div>
           <img src="<%=article.urlToImage%>" alt="" class="news-pic">
         </div>
