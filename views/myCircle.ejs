@@ -1,44 +1,85 @@
-<link rel="stylesheet" href="/stylesheets/app.css">
-<a href="/home">Back to home</a>
-<br><br>
+<!DOCTYPE html>
+<html>
 
-<a href="/circleupload">Add more people</a>
+<head>
+    <link rel="stylesheet" href="/stylesheets/app.css">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
 
-<h2>Your relatives and friends: </h2>
-<% for(var i=0; i<result.length; i++){ %>
+    <title>Landing</title>
 
-<br><br>
-This is <%= result[i].relName %>
-<br>
-It's your <%= result[i].relation %>
-<br>
-<%if(result[i].photos.length != 0){
-var j = Math.floor(Math.random() * result[i].photos.length)%>
+</head>
 
-<img id="relpic"  src="data:image/<%=result[i].photos[j].contentType%>;base64, 
-                     <%=result[i].photos[j].data.toString('base64')%>"> 
-<%}%>
+<body>
+    <div class="header">
+        <a href="/home">
+            <img src="/img/back.png" alt="">
+        </a>
+        <a href="/circleupload" class="settings">
+            <i class="fas fa-plus fa-5x"></i>
+        </a>
 
-
-<% } %>
-<br>
-<br>
-<div id="reminders">
-    <h3>YOUR RECENT REMINDERS</h3>
-
-<br>
-<%= msg %>
-
-<% for(var i=0; i<myreminders.length; i++){ %>
-
-Time: <%= myreminders[i].time %>
-<br><br>
-<%= myreminders[i].tag %>
-
-<br><br>
-
-<%}%>
-</div>
+    </div>
 
 
+    <div class="container">
+        <h2 styles="margin-top: 5rem;">Your circle </h2>
+
+
+        <% for(var i=0; i<result.length; i++){ %>
+        <div class="relative">
+            <div class="rel-text">
+                <h3 class="home-head">
+                    <%= result[i].relName %>
+                </h3>
+                <p>
+                    It's your <%= result[i].relation %>
+                </p>
+
+            </div>
+
+            <%if(result[i].photos.length != 0){
+        var j = Math.floor(Math.random() * result[i].photos.length)%>
+
+            <img id="relativepic" src="data:image/<%=result[i].photos[j].contentType%>;base64, 
+                             <%=result[i].photos[j].data.toString('base64')%>">
+            <%}%>
+        
+        
+        <% } %>
+        </div>
+
+
+
+
+
+
+        <div id="reminders">
+            <h2 class="home-head">Reminders</h2>
+            <p><%= msg %></p>
+            <table>
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                </tr>
+                <% for(var i=0; i<myreminders.length; i++){ %>
+                <tr>
+                    <td> <%= myreminders[i].time %></td>
+                    <td> <%= myreminders[i].tag %></td>
+                </tr>
+
+                <%}%>
+                
+            </table>
+        </div>
+        
+	</div>
+</body>

@@ -1,19 +1,38 @@
+<!DOCTYPE html>
+<html>
 
 <head>
-	<title>memory game</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!--Fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
+
+  <title>Landing</title>
 
 </head>
-<body>
-	<a href="/games">Back to games</a>
 
-	<div class="win-message">
-  	<h2 style="color: white;" id="win"></h2>
-  	<a href="/memorygame" style="color: white;" id="play-again"></a>
+<body>
+  <div class="header">
+    <a href="/games">
+      <img src="/img/back.png" alt="" id="back">
+    </a>
+    <a href="/memorygame" id="play-again" class="settings">
+      <i class="fas fa-undo fa-5x"></i>
+    </a>
+
 
   </div>
 
-	<section class="memory-game">
+  <div class="win-message">
+    <h2 id="win" class=""></h2>
+
+
+  </div>
+  <section class="memory-game">
     <div class="memory-card" data-framework="flower">
       <img class="front-face" src="img/1.png" alt="flower" />
       <img class="back-face" src="img/back.jpg" alt="back" />
@@ -69,10 +88,8 @@
     </div>
   </section>
 
+  <script type="text/javascript" src="js/memory.js"></script>
 
-  
-  
-	
-
-	<script type="text/javascript" src="js/memory.js"></script>
 </body>
+
+</html>

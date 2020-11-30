@@ -1,23 +1,52 @@
-<link rel="stylesheet" href="/stylesheets/app.css">
-all games here
+<!DOCTYPE html>
+<html>
 
-MEMORY GAME : <a href="/memorygame">MEMORY GAME HERE</a>
-<p></p>
-GUESS WHO :   <a href="/guesswho">Guess Who here</a>
+<head>
+    <link rel="stylesheet" href="/stylesheets/app.css">
 
-<div id="reminders">
-    <h3>YOUR RECENT REMINDERS</h3>
 
-<br>
-<%= msg %>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
 
-<% for(var i=0; i<myreminders.length; i++){ %>
+    <title>Landing</title>
 
-Time: <%= myreminders[i].time %>
-<br><br>
-<%= myreminders[i].tag %>
+</head>
 
-<br><br>
+<body>
+    <div class="header">
+        <a href="../">
+            <img src="/img/back.png" alt="">
+        </a>
+    </div>
+    <div class="container">
+        <h2 class="home-head">Which game would you like to play?</h2>
+        <a href="/memorygame" class="purp-btn">Memory Cards</a>
+        <a href="/guesswho" class="purp-btn">Guess Who</a>
 
-<%}%>
-</div>
+        <div id="reminders">
+            <h2 class="home-head">Reminders</h2>
+            <p><%= msg %></p>
+            <table>
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                </tr>
+            <% for(var i=0; i<myreminders.length; i++){ %>
+                <tr>
+                    <td>  <%= myreminders[i].time %></td>
+                    <td> <%= myreminders[i].tag %></td>
+                </tr>
+                <%}%>           
+            </table>
+      </div>
+    </div>   
+</body>
+
+

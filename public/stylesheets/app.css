@@ -123,6 +123,12 @@ h2{
 	font-size: 4rem;
 	margin-top: 3rem;
 }
+p{
+	font-size: 2.5rem;
+}
+.home-head-bottom{
+	margin-bottom: 3rem;
+}
 .home-box{
 	border: 5px solid var(--purple);
 	border-radius: 10px;
@@ -194,10 +200,10 @@ tr:nth-child(n) > td:nth-child(2){
 }
 .hr{
 	width: 90%;
-	margin: auto;
-	border-top:  5px solid var(--purple);
+	border-top:  5px solid rgba(74, 13, 102, 0.15);
 	height: 0;
-	margin-top: 3rem;
+
+	margin-bottom: 5rem;
 }
 .form-row{
 	
@@ -223,12 +229,39 @@ margin-right: 2rem;
 	margin-bottom: 3rem;
 }
 
-
-
-
-
 #relpic{
 	border-radius:100%;
-	width:250px;
-	height:250px;
+	width:450px;
+	height:450px;
+	object-fit: cover;
 }
+#relativepic{
+	border-radius:100%;
+	width:300px;
+	height:300px;
+	object-fit: cover;
+}
+#guesswhoform{
+	margin-top: 3rem;
+}
+
+/*Guesswho*/
+.options{
+	font-size: 3rem;
+}
+.crimson{
+	color: crimson;
+}
+/*my circle*/
+.relative{
+	width: 90%;
+	border: 5px solid var(--purple);
+	border-radius: 20px;
+	padding: 2rem;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	text-align: left;
+}
+
+
