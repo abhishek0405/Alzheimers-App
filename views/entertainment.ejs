@@ -32,6 +32,30 @@
 
         </div>
 
+        <div id="reminders">
+            <% console.log("hello", myreminders.length, msg) %>
+            <h2 class="home-head">Reminders</h2>
+            <p><%= msg %></p>
+            <table>
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                </tr>
+                <% for(var i=0; i<myreminders.length; i++){ %>
+                <tr>
+                    <td> <%= myreminders[i].time %></td>
+                    <td> <%= myreminders[i].tag %></td>
+                </tr>
+
+                <%}%>
+                
+            </table>
+        </div>
+
 
         
 

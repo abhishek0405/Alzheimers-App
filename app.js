@@ -259,6 +259,9 @@ app.get('/news/configure',(req,res)=>{
 })
 
 app.get('/entertainment', (req,res)=>{
+	let myreminders=[];
+	var msg = "";
+	vidids = "";
 
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	client.connect(err => {
@@ -269,7 +272,7 @@ app.get('/entertainment', (req,res)=>{
 							if(err) throw err;
 							console.log(data);
 
-							vidids = "";
+							
 							if(data[0].hasOwnProperty('videos')){
 								
 								for(var i=0; i<data[0].videos.length-1; i++)
@@ -284,10 +287,29 @@ app.get('/entertainment', (req,res)=>{
 							}
 							
 							
-							res.render('entertainment.ejs', {result: vidids});
+							//res.render('entertainment.ejs', {result: vidids});
 
 						});
 			
+			        });
+					  	client.close();	
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("events");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							myreminders = checkReminders(data);
+							if(myreminders.length==0){
+								msg = "No upcoming reminders (for 2 hours at least)";
+							}
+							res.render('entertainment.ejs', {result: vidids, msg: msg, myreminders:myreminders});
+
+						});
+						//client.close();	
 			        });
 					  	client.close();	
 })
