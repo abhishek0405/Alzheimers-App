@@ -43,15 +43,16 @@
             </div>
 
             <%if(result[i].photos.length != 0){
-        var j = Math.floor(Math.random() * result[i].photos.length)%>
+            var j = Math.floor(Math.random() * result[i].photos.length)%>
 
             <img id="relativepic" src="data:image/<%=result[i].photos[j].contentType%>;base64, 
                              <%=result[i].photos[j].data.toString('base64')%>">
             <%}%>
         
         
-        <% } %>
+       
         </div>
+        <% } %>
 
 
 

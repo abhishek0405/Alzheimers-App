@@ -111,7 +111,7 @@ h2{
 
 #reminders{
 	margin-top: 5rem;
-	width: 100%;
+	width: 90%;
 
 }
 .grid-container{
@@ -198,10 +198,17 @@ tr:nth-child(n) > td:nth-child(2){
 	margin-top: 2rem;
 	font-size: 1.5rem;
 }
-.hr{
+.hr, .hr-small{
 	width: 90%;
 	border-top:  5px solid rgba(74, 13, 102, 0.15);
+	
 	height: 0;
+}
+.hr-small{
+	margin: 3rem 0;
+
+}
+.hr{
 
 	margin-bottom: 5rem;
 }
@@ -248,20 +255,31 @@ margin-right: 2rem;
 /*Guesswho*/
 .options{
 	font-size: 3rem;
+	white-space:nowrap;
 }
 .crimson{
 	color: crimson;
 }
 /*my circle*/
-.relative{
-	width: 90%;
+.quiz{
 	border: 5px solid var(--purple);
 	border-radius: 20px;
 	padding: 2rem;
+	margin-bottom: 3rem;
+	width: 90%;
+
+}
+.relative{
+	width: 90%;
+	
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 	text-align: left;
+	
+}
+#reminders >p{
+	margin-bottom: 3rem;
 }
 
 

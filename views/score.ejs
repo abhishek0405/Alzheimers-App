@@ -31,8 +31,9 @@
 
         <%let i=0%>
 
-        <div class="container">
+        
             <%for(var question of all_questions){%>
+
             <img id="relpic" src="data:image/<%=question.photo.contentType%>;base64, 
                      <%=question.photo.data.toString('base64')%>">
 
@@ -56,8 +57,10 @@
             <h3 class="home-head">You did not answer correctly...Keep trying! </h3>
 
             <p>The correct answer is <%=correctansarr[i]%></p>
+            
 
             <%}%>
+            <div class="hr-small"></div>
         <%i+=1%>
             <%}%>
 
