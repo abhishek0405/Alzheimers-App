@@ -101,6 +101,10 @@ h2{
 .homepage{
 	padding: 5rem;
 }
+.c{
+	padding: 5%;
+	width: 90%;
+}
 
 #user-dp{
 	float: right;
@@ -273,11 +277,14 @@ margin-right: 2rem;
 }
 .relative{
 	width: 90%;
-	
+	border: 5px solid var(--purple);
 	display: flex;
+	border-radius: 20px;
+	padding: 2rem;
 	align-items: flex-start;
 	justify-content: space-between;
 	text-align: left;
+	margin-bottom: 3rem;
 	
 }
 #reminders >p{
