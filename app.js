@@ -11,10 +11,10 @@ var	User = require('./models/user'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
-const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
-//const uri = process.env.DATABASEURL;
+//const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
+const uri = process.env.DATABASEURL;
 //const uri= 'mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority'
-const NEWSAPIKEY = '3dd595f2d707459499de0e17e7861822'
+//const NEWSAPIKEY = '3dd595f2d707459499de0e17e7861822'
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
@@ -27,7 +27,7 @@ var upload = multer({ storage: storage });
 const NewsAPI = require('newsapi');
 const { type } = require('os');
 const { ESRCH } = require('constants');
-//const NEWSAPIKEY = process.env.NEWSAPIKEY;
+const NEWSAPIKEY = process.env.NEWSAPIKEY;
 //const NEWSAPIKEY='3dd595f2d707459499de0e17e7861822';
 const newsapi = new NewsAPI(NEWSAPIKEY);
 
@@ -230,7 +230,7 @@ app.get('/logout',function(req,res){
 	res.redirect('/');
 })
 
-app.get('/news',(req,res)=>{
+app.get('/news',isLoggedIn,(req,res)=>{
     newsapi.v2.topHeadlines({
         country: 'in',
         language: 'en',
@@ -242,7 +242,7 @@ app.get('/news',(req,res)=>{
     });
 })
 
-app.post('/news',(req,res)=>{
+app.post('/news',isLoggedIn,(req,res)=>{
     newsapi.v2.topHeadlines({
         country: req.body.Country,
         language: 'en',
@@ -256,11 +256,11 @@ app.post('/news',(req,res)=>{
 
 
 
-app.get('/news/configure',(req,res)=>{
+app.get('/news/configure',isLoggedIn,(req,res)=>{
     res.render('newsapp/newsconfigure');
 })
 
-app.get('/entertainment', (req,res)=>{
+app.get('/entertainment',isLoggedIn,(req,res)=>{
 
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	client.connect(err => {
@@ -294,14 +294,14 @@ app.get('/entertainment', (req,res)=>{
 					  	client.close();	
 })
 
-app.get('/addvideos', (req,res)=>{
+app.get('/addvideos',isLoggedIn,(req,res)=>{
 
 
 	res.render('addVideos.ejs');
 
 })
 
-app.post('/addvideos', (req,res)=>{
+app.post('/addvideos',isLoggedIn,(req,res)=>{
 
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	console.log("adding videos for");
@@ -324,7 +324,7 @@ app.post('/addvideos', (req,res)=>{
 	res.render('addVideos.ejs');
 })
 
-app.get('/games', (req,res)=>{
+app.get('/games',isLoggedIn,(req,res)=>{
 	let myreminders=[];
 	var msg="";
 	var client = new MongoClient(uri, { useNewUrlParser: true});
@@ -348,7 +348,7 @@ app.get('/games', (req,res)=>{
 	
 })
 
-app.get('/memorygame', (req,res)=>{
+app.get('/memorygame',isLoggedIn,(req,res)=>{
 
 	res.render('memoryGame.ejs');
 })
@@ -357,7 +357,7 @@ app.get('/quiz', (req,res)=>{
 	res.render('quiz.ejs');
 })
 
-app.get('/circle', (req,res)=>{
+app.get('/circle',isLoggedIn,(req,res)=>{
 	let myreminders=[];
 	var msg = "";
 	var client = new MongoClient(uri, { useNewUrlParser: true});
@@ -415,7 +415,7 @@ var storageCircle = multer.diskStorage({
 }); 
 var uploadCircle = multer({ storage: storageCircle }); 
 
-app.get('/circleupload', (req,res) =>{
+app.get('/circleupload',isLoggedIn,(req,res) =>{
 
 	
 	res.render('myCircleUpload.ejs');
@@ -504,7 +504,7 @@ app.get('/guesswho',isLoggedIn,(req,res)=>{
 	
 })
 
-app.post('/guesswho/checkanswer',(req,res)=>{
+app.post('/guesswho/checkanswer',isLoggedIn,(req,res)=>{
 	let myanswer=[];
 	console.log("FORM RESPONSE IS",req.body);
 	let boolarr=[]
@@ -532,7 +532,7 @@ app.post('/guesswho/checkanswer',(req,res)=>{
 	res.render("score",{boolarr:boolarr,correctansarr:correctansarr,myanswer:myanswer,score:score,all_questions:all_questions})
 })
 
-app.get('/video', (req,res)=>{
+app.get('/video',isLoggedIn,(req,res)=>{
 
 	
 	 let labels = [];
@@ -569,7 +569,7 @@ app.get('/video', (req,res)=>{
 	
 })
 
-app.get('/events', (req,res) =>{
+app.get('/events',isLoggedIn,(req,res) =>{
 	let myreminders=[];
 	var msg = "";
 	var client = new MongoClient(uri, { useNewUrlParser: true});
@@ -593,14 +593,14 @@ app.get('/events', (req,res) =>{
 
 })
 
-app.get('/eventsadd', (req,res) => {
+app.get('/eventsadd',isLoggedIn,(req,res) => {
 	res.render('eventsAdd.ejs');
 	//console.log(req.query);
 	
 
 })
 
-app.post('/eventsadd', (req,res) =>{
+app.post('/eventsadd',isLoggedIn,(req,res) =>{
 	console.log(req.body);
 	var days = [];
 	if("0" in req.body)
