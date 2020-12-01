@@ -27,43 +27,40 @@
   <div class="container">
     <h2>Guess who?</h2>
     <%var i=0%>
-    <%for(var question of all_questions){%>
-    <%i+=1%>
-    <img id="relpic" src="data:image/<%=question.photo.contentType%>;base64, 
-                         <%=question.photo.data.toString('base64')%>">
 
 
     <form action="/guesswho/checkanswer" method="POST" id="guesswhoform">
-      
-     
+      <%for(var question of all_questions){%>
+
+      <%i+=1%>
+      <div class="quiz">
+        <img id="relpic" src="data:image/<%=question.photo.contentType%>;base64, 
+           <%=question.photo.data.toString('base64')%>">
+        <div class="form-row align-items-center">
+          <div class="custom-control custom-radio">
+            <input type="radio" id=<%="customRadio"+i%> name=<%="Choice"+i%> class="custom-control-input"
+              value="<%=question.options[0]%>">
+            <label class="custom-control-label" for=<%="customRadio"+i%>><%=question.options[0]%></label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1" name=<%="Choice" + i %> class="custom-control-input"
+              value="<%=question.options[1]%>">
+            <label class="custom-control-label" for="customRadio1"><%=question.options[1]%></label>
+          </div>
 
 
-      <div class="form-row align-items-center">
-        <div class="custom-control custom-radio">
-          <input type="radio" id=<%="customRadio"+i%> name=<%="Choice"+i%> class="custom-control-input"
-            value="<%=question.options[0]%>">
-          <label class="custom-control-label" for=<%="customRadio"+i%>><%=question.options[0]%></label>
+
         </div>
-        <div class="custom-control custom-radio">
-          <input type="radio" id="customRadio1" name=<%="Choice" + i %> class="custom-control-input"
-            value="<%=question.options[1]%>">
-          <label class="custom-control-label" for="customRadio1"><%=question.options[1]%></label>
-        </div>
-
-
-
       </div>
-
-
       <%}%>
-    
+
         <button type="submit" class="purp-btn">Submit</button>
      
       
     </form>
-	
+</div>
+  
 
-	</div>
 </body>
 
 </html>
