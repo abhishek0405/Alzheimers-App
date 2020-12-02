@@ -21,14 +21,15 @@ body{
 	width: 100%;
 	padding: 1rem;
 }
-.header>i, .header>h3{
+.header>i, .header>h3, #play-again{
 	color: white;
 	display: inline;
+	text-decoration: none;
 }
 .header>i{
 	float: right
 }
-.header>h3{
+.header>h3, #play-again{
 	font-size: 5rem;
 	position: absolute;
 	left: 50%;

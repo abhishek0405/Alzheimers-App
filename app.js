@@ -11,10 +11,8 @@ var	User = require('./models/user'),
  	fs   = require('fs'),
 	path = require('path');
 var multer = require('multer'); 
-//const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
-const uri = process.env.DATABASEURL;
-//const uri= 'mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority'
-//const NEWSAPIKEY = '3dd595f2d707459499de0e17e7861822'
+const uri ="mongodb+srv://vishaka:Vishaka@cluster0.u0mor.mongodb.net/alzheimers?retryWrites=true&w=majority"
+//const uri = process.env.DATABASEURL;
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
         cb(null, 'uploads') 
@@ -27,12 +25,14 @@ var upload = multer({ storage: storage });
 const NewsAPI = require('newsapi');
 const { type } = require('os');
 const { ESRCH } = require('constants');
-const NEWSAPIKEY = process.env.NEWSAPIKEY;
-//const NEWSAPIKEY='3dd595f2d707459499de0e17e7861822';
+//const NEWSAPIKEY = process.env.NEWSAPIKEY;
+const NEWSAPIKEY='3dd595f2d707459499de0e17e7861822';
 const newsapi = new NewsAPI(NEWSAPIKEY);
 
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
+
+const flash = require('connect-flash');
 
 function isLoggedIn(req,res,next){
 	if(req.isAuthenticated()){
@@ -79,6 +79,7 @@ const GetRandQuestion =(personobj,allnames)=>{
 
 app.use(express('public'));
 app.set("view engine","ejs");
+app.use(flash());
 mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -101,6 +102,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
 	res.locals.CurrentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next();
 })	
 
@@ -200,10 +203,14 @@ app.post('/register',upload.single('DP'),function(req,res,next){
 	});
 	User.register(newUser,req.body.password,function(err,user){
 		if(err){
-			console.log("Not registered");
+			
+			req.flash("error","A user with the same username already exits! Choose another Username.")
+			console.log(err);
+			res.redirect('/register');
 
 		}
 		else{
+			req.flash("success","You have been registered succesfully");
 			passport.authenticate("local")(req,res,function(){
 				res.redirect('/login');
 			})
@@ -227,6 +234,7 @@ app.post('/login',passport.authenticate("local",{
 
 app.get('/logout',function(req,res){
 	req.logout();
+	req.flash("success","Succesfully Logged Out");
 	res.redirect('/');
 })
 
@@ -262,6 +270,10 @@ app.get('/news/configure',isLoggedIn,(req,res)=>{
 
 app.get('/entertainment',isLoggedIn,(req,res)=>{
 
+	let myreminders=[];
+	var msg = "";
+	vidids = "";
+
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	client.connect(err => {
 					  collection = client.db("alzheimers").collection("users");
@@ -271,7 +283,7 @@ app.get('/entertainment',isLoggedIn,(req,res)=>{
 							if(err) throw err;
 							console.log(data);
 
-							vidids = "";
+							
 							if(data[0].hasOwnProperty('videos')){
 								
 								for(var i=0; i<data[0].videos.length-1; i++)
@@ -286,10 +298,29 @@ app.get('/entertainment',isLoggedIn,(req,res)=>{
 							}
 							
 							
-							res.render('entertainment.ejs', {result: vidids});
+							//res.render('entertainment.ejs', {result: vidids});
 
 						});
 			
+			        });
+					  	client.close();	
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+
+	client.connect(err => {
+					  collection = client.db("alzheimers").collection("events");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							myreminders = checkReminders(data);
+							if(myreminders.length==0){
+								msg = "No upcoming reminders (for 2 hours at least)";
+							}
+							res.render('entertainment.ejs', {result: vidids, msg: msg, myreminders:myreminders});
+
+						});
+						//client.close();	
 			        });
 					  	client.close();	
 })
@@ -320,8 +351,9 @@ app.post('/addvideos',isLoggedIn,(req,res)=>{
 						    client.close();
 						});
 	});
-
-	res.render('addVideos.ejs');
+	req.flash("success","added video succesfully");
+	res.redirect('/addvideos');
+	//res.render('addVideos.ejs');
 })
 
 app.get('/games',isLoggedIn,(req,res)=>{
@@ -453,17 +485,20 @@ app.post('/circleupload',uploadCircle.array('files'),function(req,res,next){
 
 			  	collection.insertOne(newRelative, (err, result) => {
 				        if(err) {
-				            
+				            req.flash("error","Could not add");
 				            console.log(err);
-				        }
+				        }else{
 
-				 
-				        	console.log("done");
+							
+							console.log("done");
+						}
 				
 	        });
 			  	client.close();
 		});
-	res.render('myCircleUpload.ejs');
+	req.flash("success","relative added succesfully");
+	res.redirect('/circleupload');
+	//res.render('myCircleUpload.ejs');
 	
 	
 })
@@ -638,17 +673,20 @@ app.post('/eventsadd',isLoggedIn,(req,res) =>{
 
 			  	collection.insertOne(newEvent, (err, result) => {
 				        if(err) {
-				            
+				            req.flash("error","Could not add event");
 				            console.log(err);
-				        }
-
-				 
-				        	console.log("done");
+				        }else{
+							
+							
+							console.log("done");
+						}
 				
 	        });
 			  	client.close();
 		});
-	res.render('eventsAdd.ejs');
+	req.flash("success","Event added succesfully");
+	res.redirect('/eventsadd');
+	//res.render('eventsAdd.ejs');
 
 })
 

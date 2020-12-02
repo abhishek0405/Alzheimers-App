@@ -10,7 +10,23 @@
 </head>
 
 <body>
+
+    
+    
+
     <div class="container">
+
+        <%if(error && error.length>0){%>
+            <div class="alert alert-danger" role="alert">
+                  <%=error%>
+            </div>
+        <%}%>
+        <%if(success && success.length>0){%>
+            <div class="alert alert-success" role="alert">
+                  <%=success%>
+            </div>
+        <%}%>
+        
         <img src="img/Brain.svg" alt="" class="brain">
         <h1>Hello!</h1>
 

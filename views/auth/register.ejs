@@ -25,6 +25,16 @@
 
 	
 	<div class="container">
+		<%if(error && error.length>0){%>
+			<div class="alert alert-danger" role="alert">
+				  <%=error%>
+			</div>
+			<%}%>
+			<%if(success && success.length>0){%>
+			<div class="alert alert-success" role="alert">
+				  <%=success%>
+			</div>
+			<%}%>
 		<h2>Register</h2>
 		<form action="/register" method="POST" enctype="multipart/form-data">
 			<input type="text" name="name" class="form-control" placeholder="Name">
