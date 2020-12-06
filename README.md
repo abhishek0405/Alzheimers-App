@@ -1,4 +1,4 @@
-# NeuralAid
+﻿# NeuralAid
 
 ### Inspiration  
 10 percent of the people in the world aged 65 and above have the Alzheimer’s disease – the progressive form of dementia that interferes with the memory and thinking skills and eventually the ability to carry out the easiest tasks. <br>
@@ -39,7 +39,8 @@ Now you can see our app running on 127.0.0.1:3000!
 ### Try our website at:
 
 <p>View the mobile version of the website by using Chrome devtools</p> 
-[NeuralAid](http://alzheimersapp.herokuapp.com/)
+
+<a href="http://alzheimersapp.herokuapp.com/">NeuralAid</a>
  
 
 
@@ -49,6 +50,34 @@ Now you can see our app running on 127.0.0.1:3000!
 -	Javascript
 -	HTML
 -	CSS
+
+### Website screenshots
+<br>
+Homepage
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/homepage.jpg"></p>
+<br>
+News section
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/news.jpg"></p>
+<br>
+My Circle section
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/circle.jpg"></p>
+<br>
+Quiz game
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/quiz.jpg"></p>
+<br>
+Memory cards game
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/cards.jpg"></p>
+<br>
+Entertainment section
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/video.jpg"></p>
+<br>
+Reminders section
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/reminder.jpg"></p>
+<br>
+Face recognition section
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/face.jpg"></p>
+<br>
+
 
 ### Team 😊
 - [Abhishek Anantharam](https://github.com/abhishek0405) 
