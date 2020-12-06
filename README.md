@@ -39,7 +39,7 @@ Now you can see our app running on 127.0.0.1:3000!
 ### Try our website at:
 
 <p>View the mobile version of the website by using Chrome devtools</p> 
-[ALzh name]( http://alzheimersapp.herokuapp.com/)
+[NeuralAid](http://alzheimersapp.herokuapp.com/)
  
 
 
