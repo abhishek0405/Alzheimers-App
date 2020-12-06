@@ -75,7 +75,7 @@ Reminders section
 <p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/reminder.jpg"></p>
 <br>
 Face recognition section
-<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/face.jpg"></p>
+<p  align="center"><img height= "350" width = "800" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/face.jpeg"></p>
 <br>
 
 
