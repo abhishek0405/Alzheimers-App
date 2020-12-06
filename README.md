@@ -1,4 +1,4 @@
-# Alzh name
+# NeuralAid
 
 ### Inspiration  
 10 percent of the people in the world aged 65 and above have the Alzheimer’s disease – the progressive form of dementia that interferes with the memory and thinking skills and eventually the ability to carry out the easiest tasks. <br>
