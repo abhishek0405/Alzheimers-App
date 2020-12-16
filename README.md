@@ -54,28 +54,28 @@ Now you can see our app running on 127.0.0.1:3000!
 ### Website screenshots
 <br>
 Homepage
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/homepage.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/homepage.jpg"></p>
 <br>
 News section
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/news.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/news.jpg"></p>
 <br>
 My Circle section
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/circle.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/circle.jpg"></p>
 <br>
 Quiz game
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/quiz.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/quiz.jpg"></p>
 <br>
 Memory cards game
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/cards.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/cards.jpg"></p>
 <br>
 Entertainment section
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/video.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/video.jpg"></p>
 <br>
 Reminders section
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/reminder.jpg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/reminder.jpg"></p>
 <br>
 Face recognition section
-<p  align="center"><img height= "600" width = "500" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/face.jpeg"></p>
+<p  align="center"><img height= "600" width = "400" src = "https://github.com/abhishek0405/Alzheimers-App/blob/main/readme_images/face.jpeg"></p>
 <br>
 
 
