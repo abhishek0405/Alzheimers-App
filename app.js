@@ -691,6 +691,15 @@ app.post('/eventsadd',isLoggedIn,(req,res) =>{
 })
 
 
+//SAGE TEST QUIZ
+
+app.get('/games/SAGE',(req,res)=>{
+	var d = new Date();
+	console.log(d);
+	res.send("will render game");
+})
+
+
 app.listen(process.env.PORT||3000,function(){
 	console.log(process.env.PORT);
 	console.log("Server Started at http://localhost:3000/");
