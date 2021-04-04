@@ -77,6 +77,25 @@ const GetRandQuestion =(personobj,allnames)=>{
 	return questionobj;
 }
 
+const SAGETestGenerate = ()=>{
+	let test={}
+	//add points if matching with answer
+	let question1 = 'Sometimes when I’m looking for something, I forget what it is that I’m looking for.';
+	let answer1 = false;
+	let question2 = 'My friends and family seem to think I’m more forgetful now than I used to be.';
+	let answer2 = false;
+	let question3 = 'It’s hard for me to concentrate for even an hour.'
+	let answer3 = false;
+	let question4 = 'I frequently repeat myself.'
+	let answer4 = false;
+	let randbill = Math.floor(Math.random() * 30)+30;
+	let randMoneyGiven = Math.floor(Math.random() * 30)+50;
+	let question5 = `You are buying ${randbill} of groceries. How much change would you receive back from a ${randMoneyGiven} bill?`;
+	let answer5 = randMoneyGiven - randbill;
+	
+
+
+
 app.use(express('public'));
 app.set("view engine","ejs");
 app.use(flash());
