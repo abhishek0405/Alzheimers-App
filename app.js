@@ -620,6 +620,23 @@ app.post('/guesswho/checkanswer',isLoggedIn,(req,res)=>{
 	}
 	console.log(correctansarr);
 	console.log(boolarr);
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	console.log("adding score for");
+	console.log(req.body);
+	client.connect(err => {
+
+		    collection = client.db("alzheimers").collection("users");
+			
+			
+			collection.updateOne({_id: ObjectId(req.user._id)}, {$push : {scores: score}},
+					function(err, res) {
+
+						    if (err) throw err;
+						    console.log("1  document updated");
+
+						    client.close();
+						});
+	});
 	res.render("score",{boolarr:boolarr,correctansarr:correctansarr,myanswer:myanswer,score:score,all_questions:all_questions})
 })
 
@@ -755,16 +772,87 @@ app.get('/games/SAGE',(req,res)=>{
 	res.render('SAGE',{testData:testData});
 })
 
-app.post('/games/SAGE',(req,res)=>{
+app.post('/games/SAGE', isLoggedIn, (req,res)=>{
 	let score_arr = getSAGEScore(req.body,test);
 	console.log(test);
 	console.log(req.body);
 	let myScore = 0;
 	score_arr.forEach(item=>{
 		myScore+=item;
-	})
+	});
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	console.log("adding sage score for");
+	console.log(req.body);
+	client.connect(err => {
+
+		    collection = client.db("alzheimers").collection("users");
+			
+			
+			collection.updateOne({_id: ObjectId(req.user._id)}, {$push : {sageScores: myScore}},
+					function(err, res) {
+
+						    if (err) throw err;
+						    console.log("1  document updated");
+
+						    client.close();
+						});
+	});
+
 	res.render('SageScore',{myScore:myScore});
 })
+
+app.get('/dashboard', isLoggedIn, (req,res)=>{
+	var client = new MongoClient(uri, { useNewUrlParser: true});
+	client.connect(err => {
+		collection = client.db("alzheimers").collection("users");
+		
+		console.log("success getting");
+		console.log(req.user.username);
+		collection.find({username: req.user.username }).toArray(function(err,data){
+			  if(err) throw err;
+			  
+			  lastTenScores = [];
+			  lastTenScoresSage = [];
+			  console.log(data);
+			  let start = 0;
+			  let maxNum;
+
+			  let startSage = 0;
+			  let maxNumSage;
+			  if(data[0].scores.length <= 10){
+				start = 0;
+				maxNum=data[0].scores.length;
+			  }else{
+				  start = data[0].scores.length - 10;
+				  maxNum = data[0].scores.length;
+			  }
+
+			  if(data[0].sageScores.length <= 10){
+				startSage = 0;
+				maxNumSage=data[0].sageScores.length;
+			  }else{
+				  startSage = data[0].sageScores.length - 10;
+				  maxNumSage = data[0].sageScores.length;
+			  }
+			   
+
+			  for(let i=start; i<maxNum; i++){
+				  lastTenScores.push({y:data[0].scores[i]});
+			  }
+
+			  for(let i=startSage; i<maxNumSage; i++){
+				lastTenScoresSage.push({y:data[0].sageScores[i]});
+			}
+
+			  console.log(lastTenScores);
+			  res.render('dashboard.ejs', {lastScores: lastTenScores, lastScoresSage: lastTenScoresSage});
+
+		  });
+		  	client.close();
+	  });
+	//res.render('dashboard.ejs');
+});
+
 
 
 app.listen(process.env.PORT||3000,function(){

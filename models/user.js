@@ -12,7 +12,9 @@ var userSchema =  new mongoose.Schema({
         data: Buffer, 
         contentType: String 
     } ,
-	videos: [String]
+	videos: [String],
+	scores:[Number],
+	sageScores:[Number]
 	
 });
 
