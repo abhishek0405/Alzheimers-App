@@ -696,7 +696,7 @@ app.post('/eventsadd',isLoggedIn,(req,res) =>{
 app.get('/games/SAGE',(req,res)=>{
 	var d = new Date();
 	console.log(d);
-	res.send("will render game");
+	res.render('SAGE');
 })
 
 
