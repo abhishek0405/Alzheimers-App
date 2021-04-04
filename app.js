@@ -83,13 +83,13 @@ const SAGETestGenerate = ()=>{
 	//add points if matching with answer
 	let optionsBool = [true,false];
 	let question1 = 'Sometimes when I’m looking for something, I forget what it is that I’m looking for.';
-	let answer1 = false;
+	let answer1 = 'false';
 	let question2 = 'My friends and family seem to think I’m more forgetful now than I used to be.';
-	let answer2 = false;
+	let answer2 = 'false';
 	let question3 = 'It’s hard for me to concentrate for even an hour.'
-	let answer3 = false;
+	let answer3 = 'false';
 	let question4 = 'I frequently repeat myself.'
-	let answer4 = false;
+	let answer4 = 'false';
 	let randbill = Math.floor(Math.random() * 30)+30;
 	let randMoneyGiven = Math.floor(Math.random() * 30)+50;
 	let question5 = `You are buying ${randbill} of groceries. How much change would you receive back from a ${randMoneyGiven} bill?`;
@@ -100,10 +100,12 @@ const SAGETestGenerate = ()=>{
 	let answer6 = new Date();
 	let choice1 = new Date(answer6);
 	let choice2 = new Date(answer6);
+	
 	choice1.setDate(choice1.getDate()+15);
 	choice2.setDate(choice2.getDate()-12);
 	
 	let options6 = [choice2.toDateString(),choice1.toDateString(),answer6.toDateString()]
+	answer6 = answer6.toDateString().slice(0,3);
 	test = {}
 	test['Q1'] = {question:question1,answer:answer1,options:optionsBool};
 	test['Q2'] = {question:question2,answer:answer2,options:optionsBool};
@@ -113,6 +115,21 @@ const SAGETestGenerate = ()=>{
 	test['Q6'] = {question:question6,answer:answer6,options:options6};
 	return test;
 
+}
+//returns the score
+const getSAGEScore = (answers,test)=>{
+	let score_arr=[0]
+	for(let i=1;i<=6;i++){
+		if(test[`Q${i}`].answer==answers[`answer${i}`]){
+			console.log("correct");
+			score_arr.push(1);
+		} 
+		else{
+			console.log("wrong");
+			score_arr.push(0);
+		}
+	}
+	return score_arr;
 }
 
 
@@ -739,7 +756,14 @@ app.get('/games/SAGE',(req,res)=>{
 })
 
 app.post('/games/SAGE',(req,res)=>{
+	let score_arr = getSAGEScore(req.body,test);
+	console.log(test);
 	console.log(req.body);
+	let myScore = 0;
+	score_arr.forEach(item=>{
+		myScore+=item;
+	})
+	res.render('SageScore',{myScore:myScore});
 })
 
 

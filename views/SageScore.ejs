@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/stylesheets/app.css">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
+    
+    <title>Landing</title>
+
+</head>
+
+<body>
+    <div class="header">
+        <a href="/home">
+            <img src="/img/back.png" alt="">
+        </a>
+    </div>
+    <div class="container">
+        YOUR SCORE IS <%=myScore%>
+        <p></p>
+        <%if(myScore<=2){%>
+           You should see your doctor. You can refuel your brain and prevent further memory loss with food, vitamins, herbs, exercises, and medications.
+        <%}else if(myScore<=4){%>
+            Your brain is in danger. Check your diet today. You can reduce brain drain and memory loss with vitamins, brain foods, herbs, yoga and meditation techniques, and appropriate medications
+        <%}else{%>
+            You are performing well.Continue to have your healthy routine!
+        <%}%>
+      </div>
+    </div>   
+</body>
+
+
