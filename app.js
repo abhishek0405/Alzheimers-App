@@ -76,10 +76,12 @@ const GetRandQuestion =(personobj,allnames)=>{
 
 	return questionobj;
 }
-
+var test;
 const SAGETestGenerate = ()=>{
-	let test={}
+	//save the test in a global object
+	
 	//add points if matching with answer
+	let optionsBool = [true,false];
 	let question1 = 'Sometimes when I’m looking for something, I forget what it is that I’m looking for.';
 	let answer1 = false;
 	let question2 = 'My friends and family seem to think I’m more forgetful now than I used to be.';
@@ -91,9 +93,27 @@ const SAGETestGenerate = ()=>{
 	let randbill = Math.floor(Math.random() * 30)+30;
 	let randMoneyGiven = Math.floor(Math.random() * 30)+50;
 	let question5 = `You are buying ${randbill} of groceries. How much change would you receive back from a ${randMoneyGiven} bill?`;
-	let answer5 = randMoneyGiven - randbill;
 	
+	let answer5 = randMoneyGiven - randbill;
+	let options5 = [answer5+2,answer5-4,answer5];
+	let question6 = 'What is the date and day today?'
+	let answer6 = new Date();
+	let choice1 = new Date(answer6);
+	let choice2 = new Date(answer6);
+	choice1.setDate(choice1.getDate()+15);
+	choice2.setDate(choice2.getDate()-12);
+	
+	let options6 = [choice2.toDateString(),choice1.toDateString(),answer6.toDateString()]
+	test = {}
+	test['Q1'] = {question:question1,answer:answer1,options:optionsBool};
+	test['Q2'] = {question:question2,answer:answer2,options:optionsBool};
+	test['Q3'] = {question:question3,answer:answer3,options:optionsBool};
+	test['Q4'] = {question:question4,answer:answer4,options:optionsBool};
+	test['Q5'] = {question:question5,answer:answer5,options:options5};
+	test['Q6'] = {question:question6,answer:answer6,options:options6};
+	return test;
 
+}
 
 
 app.use(express('public'));
@@ -713,9 +733,13 @@ app.post('/eventsadd',isLoggedIn,(req,res) =>{
 //SAGE TEST QUIZ
 
 app.get('/games/SAGE',(req,res)=>{
-	var d = new Date();
-	console.log(d);
-	res.render('SAGE');
+	let testData = SAGETestGenerate();
+	console.log(testData);
+	res.render('SAGE',{testData:testData});
+})
+
+app.post('/games/SAGE',(req,res)=>{
+	console.log(req.body);
 })
 
 
