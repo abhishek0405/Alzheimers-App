@@ -22,15 +22,22 @@
         </a>
     </div>
     <div class="container">
-        YOUR SCORE IS <%=myScore%>
+        <div class="quiz">
+            <div class = "emptytop"></div>
+        <h3 class="home-head">YOUR SCORE IS <%=myScore%></h3>
         <p></p>
         <%if(myScore<=2){%>
-           You should see your doctor. You can refuel your brain and prevent further memory loss with food, vitamins, herbs, exercises, and medications.
+            <h5 class="home-head">You should see your doctor. You can refuel your brain and prevent further memory loss with food, vitamins, herbs, exercises, and medications.</h5>
+            <img src = "https://media.istockphoto.com/vectors/cute-nurse-emoticon-wearing-hat-and-stethoscope-emoji-smiley-isolated-vector-id1130255492?k=6&m=1130255492&s=612x612&w=0&h=6mUC1m99UBAmGpYzrOf54qrXKF_T0irDWBpUNgagO4k=">
         <%}else if(myScore<=4){%>
-            Your brain is in danger. Check your diet today. You can reduce brain drain and memory loss with vitamins, brain foods, herbs, yoga and meditation techniques, and appropriate medications
+            <h5 class="home-head">Your brain needs some exercises to stay sharp. Check your diet today. You can reduce brain drain and memory loss with vitamins, brain foods, herbs, yoga and meditation techniques, and appropriate medications</h5>
+            <img src ="https://www.gannett-cdn.com/presto/2020/04/17/USAT/7620a49d-39e9-4db9-a96c-89f3d1deb1ae-facebookreact2.png?width=660&height=660&fit=crop&format=pjpg&auto=webp">
         <%}else{%>
-            You are performing well.Continue to have your healthy routine!
+            <h5 class="home-head">You are performing well.Continue to have your healthy routine and a healty diet!</h5>
+            <img src = "https://i.pinimg.com/originals/b9/fd/a0/b9fda08ce78b724e0d74f66e3c4debec.jpg">
+
         <%}%>
+    </div>
       </div>
     </div>   
 </body>

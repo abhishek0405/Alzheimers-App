@@ -47,13 +47,15 @@
                 2) <%=question.options[1]%>
             </p>
 
-            <h3 class="home-head">Your answer: <span class="crimson"><%=myanswer[i]%> </span></h3>
+            
 
 
             <%if(boolarr[i]===true){%>
+            <h3 class="home-head">Your answer: <span class="green"><%=myanswer[i]%> </span></h3>
             <h3 class="home-head">You answered correctly!</h3>
 
             <%}else{%>
+            <h3 class="home-head">Your answer: <span class="crimson"><%=myanswer[i]%> </span></h3>
             <h3 class="home-head">You did not answer correctly...Keep trying! </h3>
 
             <p>The correct answer is <%=correctansarr[i]%></p>

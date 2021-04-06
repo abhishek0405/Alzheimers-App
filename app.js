@@ -92,7 +92,7 @@ const SAGETestGenerate = ()=>{
 	let answer4 = 'false';
 	let randbill = Math.floor(Math.random() * 30)+30;
 	let randMoneyGiven = Math.floor(Math.random() * 30)+50;
-	let question5 = `You are buying ${randbill} of groceries. How much change would you receive back from a ${randMoneyGiven} bill?`;
+	let question5 = `You are buying ${randbill} dollars of groceries. How much change would you receive back from a ${randMoneyGiven} dollar bill?`;
 	
 	let answer5 = randMoneyGiven - randbill;
 	let options5 = [answer5+2,answer5-4,answer5];

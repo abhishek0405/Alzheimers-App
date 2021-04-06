@@ -4,6 +4,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>  
+	<link rel="stylesheet" href="/stylesheets/app.css">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/3808de5cb1.js" crossorigin="anonymous"></script>
     
 <script>
 window.onload = function () {
@@ -41,18 +49,25 @@ chartSage.render();
 </script>
 </head>
 <body>
-    <h1>Welcome <%= CurrentUser.name %></h1>
+	<div class="header">
+        <a href="/home">
+            <img src="/img/back.png" alt="">
+        </a>
+    </div>
+	<div class="container">
+    Welcome <%= CurrentUser.name %>
     
-<h2>Your last guess who score was: <%= CurrentUser.scores[CurrentUser.scores.length - 1] %></h2>
-<h2>Your last sage score was: <%= CurrentUser.sageScores[CurrentUser.sageScores.length - 1] %></h2>
-<h2>Your highest guess who score: <%= Math.max(...CurrentUser.scores) %> </h2>
-<h2>Your highest sage score: <%= Math.max(...CurrentUser.sageScores) %> </h2>
-
+	<h3 class="home-head">Your last guess who score was: <%= CurrentUser.scores[CurrentUser.scores.length - 1] %> </h3>
+	<h3 class="home-head">Your last sage score was: <%= CurrentUser.sageScores[CurrentUser.sageScores.length - 1] %> </h3>
+	<h3 class="home-head">Your highest guess who score: <%= Math.max(...CurrentUser.scores) %> </h3>
+	<h3 class="home-head">Your highest sage score: <%= Math.max(...CurrentUser.sageScores) %> </h3>
+	<p></p>
 
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 
 <div id="chartContainerSage" style="height: 370px; width: 100%;"></div>
+</div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>

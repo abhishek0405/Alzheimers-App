@@ -22,21 +22,29 @@
         </a>
     </div>
     <div class="container">
+        <div class="quiz">
+         <div class="emptytop"></div>
         <form action="/games/SAGE" method ="POST">
             <% for(i=1;i<=6;i++) {%>
-               Q) <%=testData[`Q${i}`].question%>
+                Q) <%=testData[`Q${i}`].question%>
                 <p></p>
                 <p></p>
                 <%testData[`Q${i}`].options.forEach(item=>{%>
-                    <%=item%><input type = "radio" name="<%='answer'+i%>" value=<%=item%>>
+                    
+                    <input type = "radio"  id = <%=item + i%>  name="<%='answer'+i%>" value=<%=item%> class="custom-control-input">
+                    <label class="SageLabel"><%=item%></label>
+                    <p></p>
                 <%})%>
                  
                 <p></p>
                 <p></p>
             <%}%>
-            <button type = "submit">Submit</button>
+            <p></p>
+            <div class="emptydown"></div>
+            <button type="submit" class="purp-btn">Submit</button>
             
     </form>
+    </div>
       </div>
     </div>   
 </body>

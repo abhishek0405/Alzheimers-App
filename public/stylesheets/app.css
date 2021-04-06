@@ -267,6 +267,10 @@ margin-right: 2rem;
 .crimson{
 	color: crimson;
 }
+
+.green{
+	color:rgb(13, 226, 13);
+}
 /*my circle*/
 .quiz{
 	border: 5px solid var(--purple);
@@ -291,5 +295,16 @@ margin-right: 2rem;
 #reminders >p{
 	margin-bottom: 3rem;
 }
+
+.SageLabel{
+
+	font-size: 2.5rem;
+}
+
+.emptytop{
+	padding-top: 5rem;
+}
+
+
 
 
