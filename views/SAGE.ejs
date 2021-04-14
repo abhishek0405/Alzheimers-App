@@ -26,13 +26,13 @@
          <div class="emptytop"></div>
         <form action="/games/SAGE" method ="POST">
             <% for(i=1;i<=6;i++) {%>
-                Q) <%=testData[`Q${i}`].question%>
+               <span style="font-weight: bold;"> Q) <%=testData[`Q${i}`].question%></span>
                 <p></p>
                 <p></p>
                 <%testData[`Q${i}`].options.forEach(item=>{%>
                     
                     <input type = "radio"  id = <%=item + i%>  name="<%='answer'+i%>" value=<%=item%> class="custom-control-input">
-                    <label class="SageLabel"><%=item%></label>
+                    <label class="SageLabel"  ><%=item%></label>
                     <p></p>
                 <%})%>
                  
