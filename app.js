@@ -843,9 +843,18 @@ app.get('/dashboard', isLoggedIn, (req,res)=>{
 			  for(let i=startSage; i<maxNumSage; i++){
 				lastTenScoresSage.push({y:data[0].sageScores[i]});
 			}
+			let message1 = "";
+			//let message2 ="";
+
+			if(data[0].scores[data[0].scores.length - 1] >= data[0].scores[data[0].scores.length - 2]){
+				message1 = "You are showing great improvement!";
+			}else{
+				message1 = "Keep working harder, you'll do great!";
+			}
+
 
 			  console.log(lastTenScores);
-			  res.render('dashboard.ejs', {lastScores: lastTenScores, lastScoresSage: lastTenScoresSage});
+			  res.render('dashboard.ejs', {lastScores: lastTenScores, lastScoresSage: lastTenScoresSage, message:message1});
 
 		  });
 		  	client.close();

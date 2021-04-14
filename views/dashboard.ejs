@@ -55,18 +55,27 @@ chartSage.render();
         </a>
     </div>
 	<div class="container">
-    Welcome <%= CurrentUser.name %>
     
+	<div></div>
+	<div></div>
+	<div><br><br><br><br><br></div>
+    <h3 class="home-head"><strong>Welcome <%= CurrentUser.name %></strong> </h3>
 	<h3 class="home-head2">Your last guess who score was: <%= CurrentUser.scores[CurrentUser.scores.length - 1] %> </h3>
 	<h3 class="home-head2">Your last sage score was: <%= CurrentUser.sageScores[CurrentUser.sageScores.length - 1] %> </h3>
 	<h3 class="home-head2">Your highest guess who score: <%= Math.max(...CurrentUser.scores) %> </h3>
-	<h3 class="home-head2">Your highest sage score: <%= Math.max(...CurrentUser.sageScores) %> </h3>
+	<h3 class="home-head2">Your highest SAGE score: <%= Math.max(...CurrentUser.sageScores) %> </h3>
 	<p></p>
 	<div class="emptyup"></div>
-<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+	<div><br><br><br><br></div>
+<div id="chartContainer" style="height: 500px; width: 100%;"><br><br></div>
 
 
 <div id="chartContainerSage" style="height: 500px; width: 100%;"></div>
+
+<div><br><br><p><strong><%= message  %></strong></p></div>
+
+<br><br>
+
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>

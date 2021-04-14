@@ -79,8 +79,8 @@ h1{
 }
 /*Register*/
 h2{
-	font-size: 7rem;
-	margin-bottom: 5rem;
+	font-size: 5rem;
+	margin-bottom: 4rem;
 }
 .hide{
 	display: none;
@@ -150,7 +150,7 @@ p{
 	color: #000;
 }
 h3{
-	font-size: 3rem;
+	font-size: 2rem;
 }
 table{
 	width: 100%;
