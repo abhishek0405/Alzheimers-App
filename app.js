@@ -330,6 +330,27 @@ app.get('/entertainment',isLoggedIn,(req,res)=>{
 	var msg = "";
 	vidids = "";
 
+	var client1 = new MongoClient(uri, { useNewUrlParser: true});
+
+	client1.connect(err => {
+					  collection = client1.db("alzheimers").collection("events");
+					  
+					  console.log("success getting");
+					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
+							if(err) throw err;
+							console.log(data);
+							myreminders = checkReminders(data);
+							if(myreminders.length==0){
+								msg = "No upcoming reminders (for 2 hours at least)";
+							}
+							//console.log("vidids");
+							//console.log(vidids);
+							//res.render('entertainment.ejs', {result: vidids, msg: msg, myreminders:myreminders});
+
+						});
+						client1.close();	
+			        });
+
 	var client = new MongoClient(uri, { useNewUrlParser: true});
 	client.connect(err => {
 					  collection = client.db("alzheimers").collection("users");
@@ -354,31 +375,11 @@ app.get('/entertainment',isLoggedIn,(req,res)=>{
 							}
 							
 							
-							//res.render('entertainment.ejs', {result: vidids});
-
-						});
-			
-			        });
-					  	client.close();	
-	var client = new MongoClient(uri, { useNewUrlParser: true});
-
-	client.connect(err => {
-					  collection = client.db("alzheimers").collection("events");
-					  
-					  console.log("success getting");
-					  collection.find({patUserName: req.user.username }).toArray(function(err,data){
-							if(err) throw err;
-							console.log(data);
-							myreminders = checkReminders(data);
-							if(myreminders.length==0){
-								msg = "No upcoming reminders (for 2 hours at least)";
-							}
 							res.render('entertainment.ejs', {result: vidids, msg: msg, myreminders:myreminders});
 
 						});
-						//client.close();	
+						client.close();
 			        });
-					  	client.close();	
 })
 
 app.get('/addvideos',isLoggedIn,(req,res)=>{
