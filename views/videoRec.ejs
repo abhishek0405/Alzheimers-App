@@ -35,16 +35,18 @@
 <body>
 	
 	
-    <%=labels%>
+    <div  hidden id="labels"><%=labels%></div>
+	<div  hidden id="famphotos"><%=famphotos%></div>
+	<div  hidden id="famphotosFiles"><%=famphotosFiles%></div>
+	<img src="" id="pic" hidden />
     <video id="videoInput" width="720" height="550" controls muted></video>
-    <script defer async src="./js/face-api.min.js"></script>
-
-    <script defer async src="./js/video.js"></script>
-	
-
-	
-
-    
-    	
+    <script defer  src="./js/face-api.min.js"></script>
+	<!-- <script>
+		var label = <%=labels%>
+	</script> -->
+	<script>
+		var famphotos = <%- JSON.stringify(famphotos) %>;
+	</script>
+    <script defer  src="./js/video.js"></script>
 </body>
 </html>
