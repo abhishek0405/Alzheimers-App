@@ -35,10 +35,12 @@
 <body>
 	
 	
-    <%=labels%>
+    <div  hidden id="labels"><%=labels%></div>
     <video id="videoInput" width="720" height="550" controls muted></video>
     <script defer  src="./js/face-api.min.js"></script>
-
+	<!-- <script>
+		var label = <%=labels%>
+	</script> -->
     <script defer  src="./js/video.js"></script>
 	
 

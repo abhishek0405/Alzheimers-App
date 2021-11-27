@@ -1,4 +1,7 @@
 const video = document.getElementById("videoInput");
+var labels = document.getElementById("labels").innerHTML;
+labels = labels.split(",");
+labels = labels.map((word) => word.toLowerCase());
 //console.log("labels in video,js",global.labels);
 console.log("Face api is", faceapi);
 //console.log("Labels are",labels);
@@ -9,7 +12,6 @@ Promise.all([
 ]).then(start);
 
 function start() {
-  document.body.append("Loaded");
   //video.src = '../videos/speech.mp4';
 
   navigator.getUserMedia(
@@ -58,25 +60,34 @@ async function recognizeFaces() {
   });
 }
 
-function loadLabeledImages() {
+async function loadLabeledImages() {
   //const labels = ['Black Widow', 'Captain America', 'Captain Marvel', 'Hawkeye' , 'Jim Rhodes', 'Thor', 'Tony Stark']
-  const labels = ["kartik", "abhishek", "veena"]; // for WebCam
-  return Promise.all(
-    labels.map(async (label) => {
-      const descriptions = [];
+  //const labels = ["kartik", "abhishek", "veena", "lakshmi", "ananth"]; // for WebCam
+  try {
+    return Promise.all(
+      labels.map(async (label) => {
+        const descriptions = [];
 
-      for (var i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`abhishek/${label}/${i}.jpg`);
-        const detections = await faceapi
-          .detectSingleFace(img)
-          .withFaceLandmarks()
-          .withFaceDescriptor();
-        console.log(label + i + JSON.stringify(detections));
-        descriptions.push(detections.descriptor);
-      }
+        try {
+          const img_name = `abhishek/${label}/1.jpg`;
+          const img = await faceapi.fetchImage(img_name);
+          console.log(img_name);
+          const detections = await faceapi
+            .detectSingleFace(img)
+            .withFaceLandmarks()
+            .withFaceDescriptor();
+          //console.log(label + i + JSON.stringify(detections));
+          // console.log(detections);
+          descriptions.push(detections.descriptor);
 
-      document.body.append(label + " Faces Loaded | ");
-      return new faceapi.LabeledFaceDescriptors(label, descriptions);
-    })
-  );
+          return new faceapi.LabeledFaceDescriptors(label, descriptions);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  }
 }
