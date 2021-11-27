@@ -2,10 +2,10 @@ var mongoose =require("mongoose");
 var	passportLocalMongoose = require("passport-local-mongoose");
 
 var eventSchema =  new mongoose.Schema({
-	patUserName: String,
-	days: [String],
-	time: String,
-	tag: String
+	patUserName: {type : String},
+	days: {type :[String]},
+	time:{type : String},
+	tag: {type : String}
 	
 });
 
