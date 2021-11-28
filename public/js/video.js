@@ -2,9 +2,9 @@ const video = document.getElementById("videoInput");
 var labels = document.getElementById("labels").innerHTML;
 //var famphotos = document.getElementById("famphotos").innerHTML;
 var famphotosFiles = document.getElementById("famphotosFiles").innerHTML;
-console.log(labels)
-console.log(famphotos)
-console.log("famphotos")
+console.log(labels);
+console.log(famphotos);
+console.log("famphotos");
 labels = labels.split(",");
 labels = labels.map((word) => word.toLowerCase());
 //console.log("labels in video,js",global.labels);
@@ -74,41 +74,37 @@ async function loadLabeledImages() {
       labels.map(async (label) => {
         const descriptions = [];
         //console.log(label)
-        for(var i = 0; i < famphotos[label].length; i++){
-          
-          
-            //const img_name = `uploads/${label}/1.jpg`;
-            var imgs = new Image(); // width, height
-            imgs.src = 'data:image/jpg;base64,'+ famphotos[label][i];
-            imgs.style.display = "none";
-            imgs.id = label+"-"+i;
-            document.body.appendChild(imgs);
-            /*document.getElementById('pic')
+        //console.log("label is", famphotos[label].length);
+
+        for (var i = 0; i < famphotos[label].length; i++) {
+          //const img_name = `uploads/${label}/1.jpg`;
+          var imgs = new Image(); // width, height
+          imgs.src = "data:image/jpg;base64," + famphotos[label][i];
+          imgs.style.display = "none";
+          imgs.id = label + "-" + i;
+          document.body.appendChild(imgs);
+          /*document.getElementById('pic')
               .setAttribute(
                   'src', 'data:image/png;base64,'+ famphotos[label][i]
               );*/
-              //console.log("base encoded string", famphotos[j][i] )
-            var input = document.getElementById(label+"-"+i)
-            console.log(input)
-            console.log("input")
+          //console.log("base encoded string", famphotos[j][i] )
+          var input = document.getElementById(label + "-" + i);
+          console.log(input);
+          console.log("input");
 
-            //var img = await faceapi.fetchImage(input);
-            //console.log(img_name);
-            var detections = await faceapi
-              .detectSingleFace(input)
-              .withFaceLandmarks()
-              .withFaceDescriptor();
-            //console.log(label + i + JSON.stringify(detections));
-            // console.log(detections);
-            descriptions.push(detections.descriptor);
-  
-            
-          
+          //var img = await faceapi.fetchImage(input);
+          //console.log(img_name);
+          var detections = await faceapi
+            .detectSingleFace(input)
+            .withFaceLandmarks()
+            .withFaceDescriptor();
+          //console.log(label + i + JSON.stringify(detections));
+          // console.log(detections);
+          descriptions.push(detections.descriptor);
         }
         //j += 1
         return new faceapi.LabeledFaceDescriptors(label, descriptions);
       })
-      
     );
   } catch (e) {
     console.log(e);
