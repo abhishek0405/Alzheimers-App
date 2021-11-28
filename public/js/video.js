@@ -1,12 +1,12 @@
 const video = document.getElementById("videoInput");
-var labels = document.getElementById("labels").innerHTML;
+//var labels = document.getElementById("labels").innerHTML;
 //var famphotos = document.getElementById("famphotos").innerHTML;
 var famphotosFiles = document.getElementById("famphotosFiles").innerHTML;
 console.log(labels);
 console.log(famphotos);
 console.log("famphotos");
-labels = labels.split(",");
-labels = labels.map((word) => word.toLowerCase());
+//labels = labels.split(",");
+//labels = labels.map((word) => word.toLowerCase());
 //console.log("labels in video,js",global.labels);
 console.log("Face api is", faceapi);
 //console.log("Labels are",labels);
@@ -73,8 +73,8 @@ async function loadLabeledImages() {
     return Promise.all(
       labels.map(async (label) => {
         const descriptions = [];
-        //console.log(label)
-        //console.log("label is", famphotos[label].length);
+        console.log(label)
+        console.log("label is", famphotos[label].length);
 
         for (var i = 0; i < famphotos[label].length; i++) {
           //const img_name = `uploads/${label}/1.jpg`;
