@@ -5,7 +5,7 @@
 In the early stages, the patient’s long-term memory is intact while recent information such as time and day may be forgotten. While it’s not preventable, the patient’s brain can be kept active so that the brain aging process can be slowed to some extent. This disease also has a powerful effect on the family members as it opens up heart wrenching emotional experiences having to watch their old parent or spouse in such a condition. <br>
 We therefore decided to come up with <insertname> - a website to help the caretakers and family to keep the patient mentally occupied thereby helping in brain exercises. 
 
-### What it does 
+### What it does?
 The application serves as a platform to keep Alzheimer’s patients mentally occupied and aids their treatment process.  It contains various sections such as News, My Circle, Identify, Games, Entertainment, Reminders. This user-friendly platform is of immense help to the caretakers as well. 
 The various features of the website:
 Register yourself for free first to access all features.
