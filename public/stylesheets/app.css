@@ -17,9 +17,10 @@ body{
 }
 .header{
 	background-color: var(--purple);
-	position: fixed;
+	position: absolute;
 	width: 100%;
-	padding: 1rem;
+	padding: .5rem;
+	top:0;
 }
 .header>i, .header>h3, #play-again{
 	color: white;
@@ -30,7 +31,7 @@ body{
 	float: right
 }
 .header>h3, #play-again{
-	font-size: 5rem;
+	font-size: 3rem;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
@@ -42,12 +43,12 @@ h1{
 
 }
 .purp-btn{
-	font-size: 4rem;
+	font-size: 2rem;
 	color: #000;
 	text-decoration: none;
 	background-color: var(--purple);
 	margin-bottom: 2rem;
-	padding: 1rem 3rem;
+	padding: 1rem 2rem;
 	color: white;
 	border-radius: 20px;
 	min-width: 800px;
@@ -79,21 +80,22 @@ h1{
 }
 /*Register*/
 h2{
-	font-size: 5rem;
+	font-size: 3rem;
 	margin-bottom: 4rem;
 }
 .hide{
 	display: none;
 }
 .form-control{
-	font-size: 3rem;
+	font-size: 2rem;
 	border: 4px solid var(--purple);
 	border-radius: 10px;
-	margin-bottom: 3rem;
-	padding: 1rem;
+	margin-bottom: 1rem;
+	padding: .5rem;
 	width: 800px;
 	font-family: 'Montserrat';
 	text-align: center;
+	
 }
 .form-control::placeholder{
 	color: #000;
@@ -123,12 +125,12 @@ h2{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 50px;
-	width: 90%;
+	width: 100%;
 }
 
 .home-head{
-	font-size: 4rem;
-	margin-top: 3rem;
+	font-size: 3rem;
+	
 }
 
 .home-head2{
@@ -175,13 +177,14 @@ tr:nth-child(n) > td:nth-child(2){
 }
 /*News*/
 .news-container{
-	margin-top: 200px;
+	margin-top: 100px;
 }
 .news{
 	border: 5px solid var(--purple);
 	border-radius: 20px;
 	padding: 2rem;
-	margin-bottom: 3rem;
+	margin: 1rem;
+
 }
 .news-card{
 	
@@ -192,7 +195,7 @@ tr:nth-child(n) > td:nth-child(2){
 	text-align: left;
 }
 .news-text>h3{
-	font-size: 3.5rem;
+	font-size: 2rem;
 }
 
 .news-pic{
@@ -227,7 +230,7 @@ tr:nth-child(n) > td:nth-child(2){
 .form-row{
 	
 	text-align: left;
-	display: inline-block;
+	/* display: inline-block; */
 	margin-bottom: 3rem;
 }
 .chevron{
@@ -235,10 +238,10 @@ tr:nth-child(n) > td:nth-child(2){
 }
 /*news settings*/
 .custom-control> label{
-	font-size: 4rem;
+	font-size: 3rem;
 }
 .custom-control-input{
-	height: 3rem;
+	height: 2rem;
 width: 3rem;
 margin-right: 2rem;
 
@@ -250,8 +253,8 @@ margin-right: 2rem;
 
 #relpic{
 	border-radius:100%;
-	width:450px;
-	height:450px;
+	width:200px;
+	height:200px;
 	object-fit: cover;
 }
 #relativepic{
@@ -261,12 +264,12 @@ margin-right: 2rem;
 	object-fit: cover;
 }
 #guesswhoform{
-	margin-top: 3rem;
+	margin-top: 1rem;
 }
 
 /*Guesswho*/
 .options{
-	font-size: 3rem;
+	font-size: 2rem;
 	white-space:nowrap;
 }
 .crimson{
@@ -280,9 +283,12 @@ margin-right: 2rem;
 .quiz{
 	border: 5px solid var(--purple);
 	border-radius: 20px;
-	padding: 2rem;
-	margin-bottom: 3rem;
-	width: 90%;
+	padding: 1rem;
+	margin-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
 }
 .relative{

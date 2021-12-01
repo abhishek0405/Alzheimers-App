@@ -18,13 +18,13 @@
 <body>
 	<div class="header">
 		<a href="../">
-			<img src="/img/back.png" alt="">
+			<img src="/img/back.png" alt="" height="50px">
 		</a>
 
 	</div>
 
 	
-	<div class="container">
+	<div class="container d-flex justify-content-center">
 		<%if(error && error.length>0){%>
 			<div class="alert alert-danger" role="alert">
 				  <%=error%>
@@ -35,7 +35,7 @@
 				  <%=success%>
 			</div>
 			<%}%>
-			<br><br><br><br><br><br>
+			
 		<h2>Register</h2>
 		<form action="/register" method="POST" enctype="multipart/form-data">
 			<input type="text" name="name" class="form-control" placeholder="Name">
